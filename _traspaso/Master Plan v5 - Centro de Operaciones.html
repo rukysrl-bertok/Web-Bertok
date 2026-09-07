@@ -1,0 +1,1280 @@
+<title>Centro de Operaciones Bertok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+:root{
+  --papel:#F4F5F6; --papel-2:#EAECEE; --papel-3:#E1E5E8;
+  --tinta:#141C24; --tinta-2:#4A5560;
+  --linea:#D2D8DC; --linea-fuerte:#B6BFC6;
+  --acento:#0D5C6B; --acento-2:#0A7C93;
+  --critico:#A8232C; --critico-fondo:#F6E6E7;
+  --atencion:#8F5C0C; --atencion-fondo:#F7EEDF;
+  --ok:#2A6B48; --ok-fondo:#E4EFE8;
+  --nulo:#78838C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --papel:#0F151A; --papel-2:#171F27; --papel-3:#1E2831;
+    --tinta:#E3E9EE; --tinta-2:#98A4AE;
+    --linea:#28333C; --linea-fuerte:#3A4854;
+    --acento:#54BCD0; --acento-2:#7FD5E6;
+    --critico:#EC7178; --critico-fondo:#2B191B;
+    --atencion:#DCA648; --atencion-fondo:#2A2117;
+    --ok:#66C492; --ok-fondo:#16251D;
+    --nulo:#78848D;
+  }
+}
+:root[data-theme="dark"]{
+  --papel:#0F151A; --papel-2:#171F27; --papel-3:#1E2831;
+  --tinta:#E3E9EE; --tinta-2:#98A4AE;
+  --linea:#28333C; --linea-fuerte:#3A4854;
+  --acento:#54BCD0; --acento-2:#7FD5E6;
+  --critico:#EC7178; --critico-fondo:#2B191B;
+  --atencion:#DCA648; --atencion-fondo:#2A2117;
+  --ok:#66C492; --ok-fondo:#16251D;
+  --nulo:#78848D;
+}
+
+*{box-sizing:border-box}
+body{background:var(--papel);color:var(--tinta);
+  font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.envoltura{max-width:1200px;margin:0 auto;padding:0 28px 96px}
+
+.portada{border-bottom:1px solid var(--linea);padding:56px 0 34px;margin-bottom:40px}
+.eyebrow{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--acento);margin:0 0 14px}
+h1{font-family:Archivo,system-ui,sans-serif;font-weight:700;
+  font-size:clamp(34px,5.4vw,54px);line-height:1.03;letter-spacing:-.022em;
+  margin:0;text-wrap:balance;max-width:16ch}
+.lema{font-family:Archivo,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tinta-2);margin:16px 0 0;
+  padding:9px 0 0;border-top:2px solid var(--acento);display:inline-block}
+.bajada{font-size:19px;color:var(--tinta-2);max-width:62ch;margin:18px 0 0}
+.ficha{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:28px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--tinta-2)}
+.ficha b{font-weight:600;color:var(--tinta);font-family:Archivo,sans-serif;
+  text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;margin-right:7px}
+
+.tablero{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:1040px){.tablero{grid-template-columns:212px minmax(0,1fr);gap:64px;align-items:start}}
+nav.indice{display:none}
+@media(min-width:1040px){
+  nav.indice{display:block;position:sticky;top:24px;
+    font-family:Archivo,system-ui,sans-serif;font-size:12.5px;line-height:1.45;
+    max-height:calc(100vh - 48px);overflow-y:auto;
+    border-right:1px solid var(--linea);padding-right:20px}
+  nav.indice ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  nav.indice a{color:var(--tinta-2);text-decoration:none;display:grid;
+    grid-template-columns:22px 1fr;gap:6px}
+  nav.indice a span{color:var(--nulo);font-variant-numeric:tabular-nums;font-size:11px;padding-top:1px}
+  nav.indice a:hover{color:var(--acento-2)}
+  nav.indice .grupo{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--nulo);
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);font-weight:600}
+  nav.indice .grupo:first-child{margin-top:0;padding-top:0;border-top:0}
+}
+
+main{min-width:0}
+section{margin:0 0 58px;scroll-margin-top:20px}
+h2{font-family:Archivo,system-ui,sans-serif;font-weight:600;
+  font-size:clamp(22px,2.6vw,28px);line-height:1.18;letter-spacing:-.014em;
+  margin:0 0 6px;text-wrap:balance;
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline}
+h2 .num{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:400;
+  color:var(--acento);font-variant-numeric:tabular-nums}
+h3{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:16px;margin:30px 0 8px}
+h4{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:11px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--tinta-2);margin:26px 0 8px}
+p{margin:0 0 15px;max-width:68ch}
+ul,ol{margin:0 0 15px;padding-left:22px;max-width:68ch}
+li{margin:0 0 7px}
+li::marker{color:var(--nulo)}
+a{color:var(--acento-2)}
+strong{font-weight:600}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.87em}
+code{background:var(--papel-2);padding:1px 5px;border-radius:3px;border:1px solid var(--linea)}
+.intro{font-size:18.5px;color:var(--tinta-2);max-width:66ch;margin-bottom:22px}
+
+.tabla-marco{overflow-x:auto;margin:0 0 20px;border:1px solid var(--linea);
+  border-radius:4px;background:var(--papel-2)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+thead th{font-family:Archivo,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--tinta-2);text-align:left;
+  padding:11px 14px;border-bottom:1px solid var(--linea-fuerte);white-space:nowrap}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--linea);vertical-align:top;line-height:1.46}
+tbody tr:last-child td{border-bottom:0}
+td.mono,td .mono{font-size:12.5px}
+td:first-child{color:var(--tinta)}
+table.compacta{font-size:13px}
+table.compacta tbody td{padding:9px 12px}
+
+.chip{display:inline-block;font-family:Archivo,sans-serif;font-weight:600;
+  font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;white-space:nowrap;border:1px solid}
+.chip.rojo{color:var(--critico);background:var(--critico-fondo);border-color:var(--critico)}
+.chip.amarillo{color:var(--atencion);background:var(--atencion-fondo);border-color:var(--atencion)}
+.chip.verde{color:var(--ok);background:var(--ok-fondo);border-color:var(--ok)}
+.chip.gris{color:var(--nulo);background:transparent;border-color:var(--linea-fuerte)}
+.chip.acento{color:var(--acento);background:transparent;border-color:var(--acento)}
+
+.nota{border-left:3px solid var(--acento);background:var(--papel-2);
+  padding:16px 20px;margin:0 0 20px;max-width:70ch;border-radius:0 4px 4px 0}
+.nota p:last-child,.nota ul:last-child,.nota ol:last-child{margin-bottom:0}
+.nota .titulo{font-family:Archivo,sans-serif;font-weight:600;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acento);margin:0 0 7px}
+.pendiente{border-left-color:var(--atencion);background:var(--atencion-fondo)}
+.pendiente .titulo{color:var(--atencion)}
+.bloqueo{border-left-color:var(--critico);background:var(--critico-fondo)}
+.bloqueo .titulo{color:var(--critico)}
+
+.regla{font-size:20px;line-height:1.42;font-style:italic;color:var(--tinta);
+  border-left:2px solid var(--linea-fuerte);padding-left:22px;margin:24px 0;max-width:58ch}
+
+.capas{display:flex;flex-direction:column;gap:8px;margin:0 0 22px}
+.capa{border:1px solid var(--linea);border-radius:4px;background:var(--papel-2);
+  padding:12px 14px;display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px;align-items:center}
+@media(max-width:620px){.capa{grid-template-columns:1fr;gap:8px}}
+.capa .rotulo{font-family:Archivo,sans-serif;font-weight:600;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-2);line-height:1.3}
+.capa .piezas{display:flex;flex-wrap:wrap;gap:6px}
+.pieza{font-family:"IBM Plex Mono",monospace;font-size:12px;
+  border:1px solid var(--linea-fuerte);background:var(--papel);border-radius:3px;
+  padding:5px 9px;color:var(--tinta)}
+.capa.destacada{border-color:var(--acento);background:var(--papel-3)}
+.capa.destacada .rotulo{color:var(--acento)}
+.capa.lectura .pieza{border-style:dashed;color:var(--tinta-2)}
+.flecha{text-align:center;color:var(--nulo);font-size:15px;line-height:1;margin:-2px 0}
+
+.ciclo-marco{overflow-x:auto;margin:0 0 20px;padding-bottom:6px}
+.ciclo{display:flex;align-items:stretch;gap:0;min-width:660px}
+.paso{border:1px solid var(--linea-fuerte);background:var(--papel-2);border-radius:4px;
+  padding:10px 12px;min-width:104px;display:flex;flex-direction:column;gap:3px}
+.paso .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--tinta)}
+.paso .q{font-size:11.5px;line-height:1.35;color:var(--tinta-2);font-family:Archivo,sans-serif}
+.paso.opt{border-style:dashed}
+.entre{display:flex;align-items:center;color:var(--nulo);padding:0 9px;font-size:14px}
+
+.maqueta{border:1px solid var(--linea-fuerte);border-radius:4px;background:var(--papel-3);
+  padding:16px 18px;margin:0 0 20px;font-family:"IBM Plex Mono",monospace;
+  font-size:13.5px;line-height:1.7;max-width:60ch;overflow-x:auto}
+.maqueta .t{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em}
+.maqueta .d{color:var(--tinta-2);font-size:12.5px}
+
+.pie{border-top:1px solid var(--linea);margin-top:56px;padding-top:22px;
+  font-family:Archivo,sans-serif;font-size:12px;color:var(--nulo);max-width:68ch}
+.fuentes{font-size:13.5px}
+.fuentes li{margin-bottom:9px;color:var(--tinta-2)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--acento-2);outline-offset:2px;border-radius:2px}
+</style>
+
+<div class="envoltura">
+
+<header class="portada">
+  <p class="eyebrow">Master plan arquitectónico · versión 5</p>
+  <h1>Centro de Operaciones Bertok</h1>
+  <p class="lema">Dejá de acordarte de todo</p>
+  <p class="bajada">Una capa de coordinación y control por encima de los sistemas que Bertok ya tiene. No los reemplaza, no recalcula lo que ellos calculan, y sólo escribe en su propia base.</p>
+  <div class="ficha">
+    <span><b>Fecha</b>05/09/2026</span>
+    <span><b>Para</b>Gerardo Corzo</span>
+    <span><b>Procesos</b>13</span>
+    <span><b>Estado</b>Listo para Fase 0 · revisado con fuentes externas</span>
+  </div>
+</header>
+
+<div class="tablero">
+
+<nav class="indice" aria-label="Índice">
+  <ol>
+    <li class="grupo">Encuadre</li>
+    <li><a href="#s0"><span>00</span>Cómo leer esto</a></li>
+    <li><a href="#s1"><span>01</span>Correcciones al punto de partida</a></li>
+    <li><a href="#s2"><span>02</span>Qué es y qué no es</a></li>
+    <li><a href="#s3"><span>03</span>Principio rector y nombre</a></li>
+    <li><a href="#s4"><span>04</span>Fundamentos externos</a></li>
+    <li class="grupo">El motor</li>
+    <li><a href="#s5"><span>05</span>Arquitectura general</a></li>
+    <li><a href="#s6"><span>06</span>Detector y clave natural</a></li>
+    <li><a href="#s7"><span>07</span>Ciclo de vida</a></li>
+    <li><a href="#s8"><span>08</span>Turnos y asignación</a></li>
+    <li><a href="#s9"><span>09</span>Prioridad y proyección</a></li>
+    <li><a href="#s10"><span>10</span>Tipos y línea de corte</a></li>
+    <li><a href="#s11"><span>11</span>Prevención y racionalización</a></li>
+    <li><a href="#s12"><span>12</span>Modelo de datos</a></li>
+    <li class="grupo">Personas</li>
+    <li><a href="#s13"><span>13</span>Responsables</a></li>
+    <li><a href="#s14"><span>14</span>Notificación y escalado</a></li>
+    <li><a href="#s15"><span>15</span>Auditoría</a></li>
+    <li><a href="#s16"><span>16</span>Seguridad y reserva</a></li>
+    <li class="grupo">Convivencia</li>
+    <li><a href="#s17"><span>17</span>Relación con cada sistema</a></li>
+    <li><a href="#s18"><span>18</span>Infraestructura</a></li>
+    <li><a href="#s19"><span>19</span>Salud de datos</a></li>
+    <li class="grupo">Ejecución</li>
+    <li><a href="#s20"><span>20</span>Sombra, calidad y umbrales</a></li>
+    <li><a href="#s21"><span>21</span>Catálogo de tarjetas</a></li>
+    <li><a href="#s22"><span>22</span>Reposición a Full</a></li>
+    <li><a href="#s23"><span>23</span>Plan de fases</a></li>
+    <li><a href="#s24"><span>24</span>Agregar una tarjeta</a></li>
+    <li><a href="#s25"><span>25</span>Decisiones</a></li>
+    <li><a href="#s26"><span>26</span>Fuentes</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- 00 -->
+<section id="s0">
+  <h2><span class="num">00</span>Cómo leer este documento</h2>
+  <p>Define la <strong>arquitectura funcional y de software</strong> del Centro de Operaciones. No contiene código.</p>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:30%">Marca</th><th>Significado</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip rojo">Roto / sin hacer</span></td><td>No existe, o existe y no funciona.</td></tr>
+      <tr><td><span class="chip amarillo">Probado por código</span></td><td>Hecho y verificado por código, <strong>no</strong> por una persona.</td></tr>
+      <tr><td><span class="chip verde">Verificado</span></td><td>Una persona lo usó en la operación real. Nada llega acá antes.</td></tr>
+      <tr><td><span class="chip acento">Decidido</span></td><td>Definición cerrada en sesión con Gerardo.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Lo que falta definir está en el punto 25 y no se supone en ningún lado del documento.</p>
+</section>
+
+<!-- 01 -->
+<section id="s1">
+  <h2><span class="num">01</span>Correcciones al punto de partida</h2>
+  <p class="intro">El plan conceptual original se escribió sin acceso al relevamiento real. Su filosofía se conserva casi entera; su inventario de partida no.</p>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:32%">El plan decía</th><th>La realidad</th><th style="width:26%">Qué cambia</th></tr></thead>
+    <tbody>
+      <tr><td>«Power BI / Bertok BI ya está bastante avanzado»</td><td>No existe Power BI. Bertok BI son 44 scripts y 17 tablas <code>bertok_bi_*</code> dentro de <code>ML.db</code>. Su dashboard está pendiente.</td><td>No hay capa de visualización preexistente. Se construye.</td></tr>
+      <tr><td>«Integración con Contabilium»</td><td>No hay API. Scraping con Playwright y sesión que vence cada pocos días.</td><td>Es la fuente más frágil. Toda tarjeta que dependa de ella necesita detección de datos vencidos.</td></tr>
+      <tr><td>«Picking en etapa de prueba»</td><td><strong>Uso diario real en el depósito, pero todavía en depuración</strong>: roles abiertos, flujo en ajuste. Y se cae solo por causa desconocida.</td><td>No es un sandbox, pero <strong>todavía es maleable</strong> — y eso permite arreglar cosas ahí en vez de compensarlas con tarjetas.</td></tr>
+      <tr><td>Nunca menciona n8n, Odoo, Cortex ni Hermes</td><td>Es todo el bus de eventos y el canal de notificación, ya en producción.</td><td>El canal de aviso no se construye: se reutiliza.</td></tr>
+      <tr><td>Siete procesos</td><td>Son <strong>trece</strong>. Faltaban Mercado Ads, Promociones ML, Google Ads, redes, rendición de cuentas y comercio exterior.</td><td>Cambia el orden de fases y la carga por persona.</td></tr>
+      <tr><td>«Nunca Full»</td><td>Las dos cosas eran ciertas y estaban mezcladas en una frase.</td><td>Desbloquea la tarjeta de reposición.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>La regla de Full, partida en dos</h3>
+  <ul>
+    <li><strong>Fulfillment de pedidos.</strong> Bertok <strong>nunca</strong> arma ni despacha un pedido Full. Por eso Picking los filtra. Vigente, sin cambios.</li>
+    <li><strong>Reposición de inventario a Full.</strong> Cada ~15 días, <strong>200 a 300 paquetes</strong> de SKU repetidos en un único envío, con flete de ML que ML cobra. Después ML almacena y entrega.</li>
+  </ul>
+  <div class="nota">
+    <p class="titulo">Acción de documentación</p>
+    <p>El <code>CLAUDE.md</code> raíz tiene que reflejar las dos reglas separadas. Hoy la segunda operación no está documentada en ningún lado.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2">
+  <h2><span class="num">02</span>Qué es y qué no es</h2>
+  <p class="regla">¿Qué necesita atención ahora? Y después: ¿qué se va a convertir en un problema si nadie hace nada?</p>
+  <h4>Es</h4>
+  <ul>
+    <li>Una capa de <strong>detección, priorización, asignación, control y registro</strong> sobre procesos que ya ocurren.</li>
+    <li>La única superficie donde un pendiente se hace visible y no se puede perder en silencio.</li>
+  </ul>
+  <h4>No es</h4>
+  <ul>
+    <li><strong>No es el sistema operativo de Bertok.</strong> ML, Contabilium y Picking siguen haciendo las cosas.</li>
+    <li><strong>No es la capa analítica.</strong> Bertok BI analiza lo que pasó; el Centro actúa sobre lo que está pasando.</li>
+    <li><strong>No recalcula nada.</strong> Rentabilidad, costo por SKU, demanda y punto de quiebre ya están calculados con reglas validadas contra facturación real.</li>
+    <li><strong>No es un tablero de métricas.</strong> Si un número no dispara una acción, no va.</li>
+  </ul>
+  <p class="regla">El Centro sólo lee de los sistemas ajenos. Lo único que escribe es su propia base.</p>
+  <p>Esta regla no tiene excepciones. <span class="chip acento">Decidido</span> Se evaluó una —que el Centro creara el pedido de reposición Full dentro de Picking— y se descartó. La consecuencia está resuelta por lectura en el punto 22.</p>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <h2><span class="num">03</span>Principio rector y nombre</h2>
+  <p class="regla">Si una tarea es importante para Bertok y alguien tiene que acordarse de hacerla, el sistema todavía está incompleto.</p>
+  <p>Las personas ejecutan procesos definidos. El sistema <strong>detecta, fecha, muestra, asigna, controla, registra, escala y deja evidencia</strong>.</p>
+  <h3>El nombre que ve el equipo</h3>
+  <p>En la pantalla el sistema se llama <strong>DEJÁ DE ACORDARTE DE TODO</strong>. <span class="chip acento">Decidido</span></p>
+  <p>No es marketing interno. Un sistema percibido como vigilancia recibe datos falsos: se marca hecho lo que no se hizo, se descarta lo incómodo. El nombre es gratis y empuja para el lado correcto.</p>
+  <div class="nota pendiente">
+    <p class="titulo">Límite honesto del principio</p>
+    <p>El software hace <em>visible</em> la ausencia de un dueño. No la crea. Una tarjeta en rojo sin dueño y sin consecuencia se vuelve paisaje en tres semanas. Definir dueños y aplicar correctivos es una decisión de organización, no de arquitectura.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4">
+  <h2><span class="num">04</span>Fundamentos externos</h2>
+  <p class="intro">Lo que estamos diseñando tiene nombre en cinco disciplinas, y en tres hay estándares maduros. No hace falta inventar el marco: hay que aplicarlo.</p>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:22%">Disciplina</th><th>Qué aporta</th><th style="width:24%">Dónde se aplica</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ISA-18.2</strong><br><span class="mono">alarmas</span></td><td>Estándar industrial. Principio central: <em>toda alarma debe ser un llamado necesario y accionable a una respuesta humana</em>, documentada antes de encenderla.</td><td>La ficha de racionalización (punto 11).</td></tr>
+      <tr><td><strong>Andon</strong><br><span class="mono">Toyota / lean</span></td><td>La pantalla es literalmente un tablero Andon digital. De la práctica: <em>las plantas que le sacan valor definen quién responde y en cuánto tiempo antes de colgar el primer display</em>.</td><td>Confirma que los dueños son prerrequisito, no consecuencia.</td></tr>
+      <tr><td><strong>Google SRE</strong><br><span class="mono">guardias</span></td><td>Separa <strong>aviso</strong> (acción inmediata), <strong>ticket</strong> (acción, no ahora) y <strong>registro</strong> (nadie se entera). Y da una vara de carga sostenible.</td><td>Escalera de escalado (14) y métricas de calidad (20).</td></tr>
+      <tr><td><strong>Revisión periódica (R,S)</strong><br><span class="mono">inv. operativa</span></td><td>Cuánto reponer está resuelto hace décadas: el nivel objetivo se elige donde el costo de quedarse corto iguala al de pasarse.</td><td>Cantidades de reposición a Full (22).</td></tr>
+      <tr><td><strong>Kanban</strong><br><span class="mono">límites de WIP</span></td><td>Limitar cuántas cosas tiene una persona en curso reduce el multitasking y hace visibles los bloqueos.</td><td>Tope de <code>en_curso</code> por persona (7).</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota bloqueo">
+    <p class="titulo">El dato que más debería preocuparnos</p>
+    <p>La literatura de fatiga de alertas es consistente: los equipos reciben del orden de <strong>2.000 alertas por semana y sólo cerca del 3% requiere acción inmediata</strong>. El resultado no es que respondan peor a las malas — <strong>dejan de responder a todas</strong>.</p>
+    <p>El riesgo número uno de este proyecto no es que falle técnicamente. Es que funcione, grite de más tres semanas, y el equipo aprenda a no mirar la pantalla. Todo el punto 20 existe para evitar eso.</p>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="s5">
+  <h2><span class="num">05</span>Arquitectura general</h2>
+  <div class="capas">
+    <div class="capa lectura">
+      <div class="rotulo">Fuentes<br>solo lectura</div>
+      <div class="piezas">
+        <span class="pieza">ML.db · 47 tablas</span><span class="pieza">bertok_bi_* · 17</span>
+        <span class="pieza">picking.db</span><span class="pieza">Excel Contabilium</span>
+        <span class="pieza">05 · Compras</span><span class="pieza">Odoo</span>
+      </div>
+    </div>
+    <div class="flecha">↓</div>
+    <div class="capa destacada">
+      <div class="rotulo">Detectores</div>
+      <div class="piezas">
+        <span class="pieza">funciones puras</span><span class="pieza">sin efectos</span>
+        <span class="pieza">devuelven hallazgos</span><span class="pieza">frecuencia propia</span>
+      </div>
+    </div>
+    <div class="flecha">↓</div>
+    <div class="capa destacada">
+      <div class="rotulo">Registro<br>ops.db</div>
+      <div class="piezas">
+        <span class="pieza">hallazgos</span><span class="pieza">eventos</span>
+        <span class="pieza">personas</span><span class="pieza">turnos</span><span class="pieza">guarda de alcance</span>
+      </div>
+    </div>
+    <div class="flecha">↓</div>
+    <div class="capa">
+      <div class="rotulo">Prioridad</div>
+      <div class="piezas"><span class="pieza">tiempo · antigüedad · magnitud</span><span class="pieza">proyección</span></div>
+    </div>
+    <div class="flecha">↓</div>
+    <div class="capa">
+      <div class="rotulo">Salidas</div>
+      <div class="piezas">
+        <span class="pieza">Modo TV</span><span class="pieza">Modo usuario</span>
+        <span class="pieza">Push · n8n → WhatsApp</span><span class="pieza">Digest semanal</span>
+      </div>
+    </div>
+  </div>
+  <p>Bertok BI queda <strong>al costado, no arriba ni abajo</strong>: lee las mismas fuentes, produce sus <code>bertok_bi_*</code>, y el Centro los consume como una fuente más. No hay dependencia circular.</p>
+</section>
+
+<!-- 06 -->
+<section id="s6">
+  <h2><span class="num">06</span>El motor: detector y clave natural</h2>
+  <p class="intro">El corazón técnico. Sin esto, una tarjeta es una consulta que se regenera; con esto, es un proceso que se puede seguir en el tiempo.</p>
+  <p><strong>El detector</strong> es una función pura: lee las fuentes y devuelve entre cero y N <em>hallazgos</em>. No escribe, no avisa, no sabe qué pasó ayer. Se puede correr mil veces sin consecuencias, y por eso se prueba contra datos reales sin tocar la operación. <strong>El estado</strong> vive aparte, en <code>ops.db</code>, y es lo único que recuerda.</p>
+
+  <h3>La clave natural</h3>
+  <p>Cada hallazgo trae una <strong>clave estable derivada del hecho real</strong>, no de la corrida.</p>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:36%">Clave natural</th><th>Qué representa</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">cierre:remito:18432</td><td>Ese remito sigue sin cerrar.</td></tr>
+      <tr><td class="mono">despacho:2026-09-05:flex</td><td>El corte de Flex de hoy.</td></tr>
+      <tr><td class="mono">full:ciclo:2026-09-16:armar</td><td>El hito de armado de esa reposición.</td></tr>
+      <tr><td class="mono">ads:aviso:MLA8823:quiebre</td><td>Ese aviso pasó el punto de quiebre.</td></tr>
+      <tr><td class="mono">cex:container:CT-0042:saldo</td><td>El saldo de ese container.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul>
+    <li><strong>Ya existía</strong> → es el mismo problema. Se actualizan sus datos y <strong>se conserva su fecha de nacimiento</strong>, y con ella su antigüedad.</li>
+    <li><strong>Es nueva</strong> → nace un hallazgo.</li>
+    <li><strong>Desapareció</strong> → se resolvió en el mundo real. Cierra solo, con motivo <code>automático</code>.</li>
+  </ul>
+  <p>Sin clave natural no hay antigüedad, y sin antigüedad no hay prioridad creciente, ni escalado, ni auditoría. <strong>Es la pieza que separa un centro de operaciones de un dashboard.</strong> Y hace que correr un detector sea <strong>idempotente</strong>: si la PC se reinicia a mitad de una corrida, la siguiente deja todo consistente.</p>
+
+  <h3>Frecuencia por detector <span class="chip acento">Decidido</span></h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:34%">Detector</th><th style="width:26%">Frecuencia</th><th>Por qué</th></tr></thead>
+    <tbody>
+      <tr><td>Despachos</td><td><strong>5 min</strong>, 9:00–15:30</td><td>Único con reloj duro.</td></tr>
+      <tr><td>Salud de datos</td><td>15 min</td><td>Tiene que enterarse antes que las personas.</td></tr>
+      <tr><td>Pendientes de cierre</td><td>30 min</td><td>Se miden en horas.</td></tr>
+      <tr><td>Reclamos ML</td><td>30 min</td><td>Se miden en días.</td></tr>
+      <tr><td>Preguntas ML</td><td>lee lo que trae Hermes</td><td>No duplica cuota de la API.</td></tr>
+      <tr><td>Mercado Ads · Promociones</td><td>1 vez por día</td><td>Revisión semanal, detección diaria.</td></tr>
+      <tr><td>Full · Comercio exterior</td><td>1 vez por día, a la mañana</td><td>Horizonte de días y meses.</td></tr>
+      <tr><td>Insumos · Redes · Rendición · Google Ads</td><td>1 vez por día</td><td>Puro calendario.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="s7">
+  <h2><span class="num">07</span>Ciclo de vida de un hallazgo</h2>
+  <p>Cada transición escribe un evento en el registro append-only y actualiza el estado del hallazgo. El registro nunca se pisa — misma disciplina que la auditoría de Picking. Ver el punto 12 sobre por qué el estado es autoritativo y no una reconstrucción.</p>
+  <div class="ciclo-marco">
+    <div class="ciclo">
+      <div class="paso"><span class="n">detectado</span><span class="q">Existe. Todavía no molesta.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">visible</span><span class="q">Cruzó el umbral.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">asignado</span><span class="q">Tiene nombre. Nace acá.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">en_curso</span><span class="q">Alguien lo agarró.</span></div>
+      <div class="entre">→</div>
+      <div class="paso opt"><span class="n">en_revisión</span><span class="q">Sólo si el proceso lo pide.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">resuelto</span><span class="q">Automático o confirmado.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">archivado</span><span class="q">Sale de pantalla, queda en historia.</span></div>
+    </div>
+  </div>
+  <h4>Reglas de transición</h4>
+  <ul>
+    <li><strong><code>detectado</code> ≠ <code>visible</code>.</strong> Un remito sin cerrar hace dos horas existe pero no es un problema. Esa separación evita que la pantalla grite todo el tiempo.</li>
+    <li><strong>Nace asignado, nunca huérfano.</strong> <span class="chip acento">Decidido</span></li>
+    <li><strong><code>resuelto</code> lleva motivo obligatorio:</strong> <code>automático</code> o <code>confirmado</code> (con nombre). Hay que poder distinguirlos al auditar.</li>
+    <li><strong>Un hallazgo cerrado que reaparece no revive:</strong> nace uno nuevo, enlazado al anterior. Si un remito se cierra y se reabre tres veces, eso tiene que verse.</li>
+    <li><strong>Liberación automática:</strong> un hallazgo <code>en_curso</code> sin actividad al cierre del día vuelve a <code>asignado</code>.</li>
+  </ul>
+  <h3>Posponer <span class="chip acento">Decidido</span></h3>
+  <ul>
+    <li>Sólo puede posponer <strong>el responsable asignado</strong>, desde su PC, logueado.</li>
+    <li><strong>A la tercera vez consecutiva sobre el mismo hallazgo, se notifica a Gerardo.</strong></li>
+  </ul>
+  <p>Posponer existe para que la gente no use el descarte como sustituto. Es la válvula honesta: «ya lo vi, lo hago a las 3». Sin ella, la única salida disponible es hacer desaparecer el problema, y ahí se pierde la señal.</p>
+
+  <h3>No existe el estado «descartado» <span class="chip acento">Decidido</span></h3>
+  <p class="regla">Un hallazgo tiene sólo dos salidas: se resuelve, o el detector deja de verlo.</p>
+  <p>Nadie puede hacer desaparecer algo porque le resulta incómodo. Eso cierra la puerta trasera por la que, en la mayoría de estos sistemas, se escapa la señal — y con posponer resuelto, no hace falta.</p>
+  <p>El costo es real y está bien pagarlo: si un detector produce un falso positivo, <strong>no hay forma de taparlo</strong>. Se queda ahí, molestando, hasta que se arregle el detector — que es exactamente la presión que corresponde. Y si se vuelve insoportable, la salida de emergencia es que <strong>Gerardo apague la tarjeta entera</strong>, no que alguien borre el ítem. <strong>Se apaga la tarjeta, no el síntoma.</strong></p>
+  <div class="nota">
+    <p class="titulo">Tope de trabajo en curso</p>
+    <p>De la práctica Kanban: conviene limitar cuántos hallazgos puede tener una persona en <code>en_curso</code>. Sin tope aparece el patrón de agarrar ocho cosas y no terminar ninguna, que además borra la señal — todo figura «en curso» y nada avanza. El número sale de la observación en modo sombra.</p>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="s8">
+  <h2><span class="num">08</span>Turnos y asignación</h2>
+  <p class="intro">Tres de los trece procesos rotan. Eso no es una excepción suelta: es un mecanismo que la arquitectura necesita de primera.</p>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:32%">Proceso</th><th style="width:34%">Rotan</th><th>Cadencia</th></tr></thead>
+    <tbody>
+      <tr><td>Despachos del día</td><td>Facundo ↔ Federico</td><td>Diaria</td></tr>
+      <tr><td>Preguntas ML</td><td>Abril → Facundo → Federico</td><td>Diaria</td></tr>
+      <tr><td>Reposición a Full</td><td>Facundo ↔ Federico</td><td>Por ciclo (~15 días)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>El sistema calcula de quién es el turno para una fecha dada, sin que nadie asigne a mano. Eso necesita dos reglas o se rompe:</p>
+  <ol>
+    <li><strong>El turno define quién nace dueño, no quién queda dueño.</strong> Un hallazgo que nace un martes se queda con el dueño del martes aunque siga abierto el jueves. Si el dueño cambia con el calendario, nadie es responsable de nada: el pendiente se desliza hacia adelante y siempre es «de otro».</li>
+    <li><strong>Hay que poder marcar ausencias.</strong> Si el turno le toca a alguien que está de franco, el sistema le asigna todo, nadie acusa recibo, y a las dos horas escala todo. La rotación tiene que poder saltear.</li>
+  </ol>
+
+  <h3>Asignación por dato</h3>
+  <p>En el canal ML de Pendientes de cierre, el responsable <strong>no está configurado: sale del dato.</strong> <code>picking.db</code> ya registra quién escaneó cada cosa, así que el hallazgo se asigna a la persona que efectivamente armó ese paquete.</p>
+  <p class="regla">La asignación puede venir de configuración o venir del dato. Cuando puede venir del dato, siempre es mejor.</p>
+  <p>No hay tabla que se desactualice, el aviso llega a quien realmente puede resolverlo, y la auditoría queda limpia. En ese caso el escalado va <strong>al dueño del turno de Despachos de ese día</strong>, que es quien está a cargo de la salida de mercadería.</p>
+
+  <div class="nota">
+    <p class="titulo">Relación con Cortex</p>
+    <p>Cortex reparte los leads de WhatsApp entre esos mismos tres, pero <strong>lead por lead a medida que entran</strong>, no por día. Los tres reciben leads todos los días, así que las dos rotaciones no chocan y no hay nada que alinear.</p>
+    <p>Lo único a mirar con el uso: <strong>el que está de turno en Preguntas ML tiene un día más cargado</strong> —todas las preguntas más su parte normal de leads—. Si las métricas del punto 20 lo muestran, Cortex podría saltearlo ese día. No se decide antes de tener el dato.</p>
+  </div>
+</section>
+
+<!-- 09 -->
+<section id="s9">
+  <h2><span class="num">09</span>Prioridad y proyección</h2>
+  <p>Verde, amarillo y rojo son <strong>salidas</strong>, no estados. Cada detector define su función de prioridad a partir de tres insumos —<strong>tiempo restante</strong>, <strong>antigüedad</strong> y <strong>magnitud</strong>— y el color es cómo se dibuja el resultado.</p>
+  <ul>
+    <li><strong>Es monótona en el tiempo.</strong> Si nadie hace nada, la prioridad no baja.</li>
+    <li><strong>El orden en pantalla lo decide ella</strong>, no la maqueta. No hay lugares fijos: hay una lista ordenada, y la pantalla muestra las primeras.</li>
+  </ul>
+  <h3>La proyección: de reportar a predecir</h3>
+  <div class="maqueta">
+    <div class="t">DESPACHOS · FLEX 13:30</div>
+    <div>18 de 24 listos</div>
+    <div class="d">4 en armado · 2 sin empezar</div>
+    <div class="d">ritmo 3 min/pedido → termina 13:04</div>
+  </div>
+  <p>A las 12:40 con 6 pendientes y una mediana histórica de 3 minutos por pedido: 18 minutos, termina 12:58, alcanza. Con 12 pendientes: 36 minutos, termina 13:16, <strong>no alcanza — y eso es rojo antes de que venza el plazo</strong>.</p>
+  <p>Sin proyección, la tarjeta avisa a las 13:30 que no llegaste, cuando ya no se puede hacer nada. El ritmo sale de <code>picking.db</code>: <strong>mediana de los últimos 30 días, no promedio</strong>, misma regla que Bertok ya aplica a la demanda.</p>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <h2><span class="num">10</span>Tipos de tarjeta y línea de corte</h2>
+
+  <h3>Dos familias</h3>
+  <p>Los trece procesos no son todos iguales, y confundirlos es la causa más común de tableros que se abandonan:</p>
+  <ul>
+    <li><strong>De excepción.</strong> Pasó algo —entró un pedido, una pregunta, un reclamo— y el sistema detecta lo que quedó mal. Son las más fáciles de hacer bien.</li>
+    <li><strong>De compromiso.</strong> No pasa nada que las dispare. Son cosas que deberían ocurrir seguido y se abandonan. Es exactamente el dolor original: <em>«se hacen videos para ML un par de días y después se abandona la tarea»</em>.</li>
+  </ul>
+  <p>Las de compromiso son las más frágiles: sin consecuencia inmediata, una alerta que se puede ignorar sin que pase nada enseña que las alertas se pueden ignorar — y eso contamina a las otras doce. Por eso van diseñadas como <strong>medidor de cumplimiento, no como alarma</strong>, y nunca mandan push.</p>
+  <div class="maqueta">
+    <div class="t">REDES · SEPTIEMBRE</div>
+    <div>2 de 4 posteos</div>
+    <div class="d">último: hace 11 días</div>
+  </div>
+
+  <h3>Tres mecanismos de cierre</h3>
+  <div class="tabla-marco">
+  <table>
+    <thead><tr><th style="width:20%">Tipo</th><th>Cómo se cierra</th><th style="width:26%">Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Informativa</strong></td><td>Sola. El detector deja de verla porque el dato de origen cambió.</td><td>Preguntas, Reclamos, Pendientes de cierre.</td></tr>
+      <tr><td><strong>De acción</strong></td><td>Una persona confirma algo que el sistema no puede observar.</td><td>Sólo si no hay forma de observarlo.</td></tr>
+      <tr><td><strong>De calendario</strong></td><td>Nace por cadencia. Al cerrarse agenda la próxima instancia.</td><td>Insumos, Redes, Rendición de cuentas.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="regla">Ante la duda, informativa. Una tarjeta de acción es una promesa de que alguien va a ser honesto todos los días durante años.</p>
+
+  <h3>Línea de corte <span class="chip acento">Decidido</span></h3>
+  <p class="regla">Toda tarjeta nueva arranca vacía. La deuda vieja no entra a la pantalla.</p>
+  <p>Es un principio general y nace de un caso concreto: <strong>el 40-50% de los pedidos nunca tuvo el remito firmado.</strong> Si esa tarjeta se enciende con todo el histórico, arranca con cientos de pendientes en rojo que nadie puede resolver — y en una semana el equipo aprende que el rojo no significa nada. Eso ya no se recupera.</p>
+  <p>Entonces: la tarjeta sólo toma hechos desde la fecha de encendido. Lo viejo va a una lista aparte, fuera de la TV, que se trabaja como proyecto o se asume como pérdida. Muchos de esos remitos ya no van a aparecer nunca, y perseguirlos consume energía que rinde más puesta en que no vuelva a pasar.</p>
+
+  <h3>El estado «sin pendientes» <span class="chip acento">Decidido</span></h3>
+  <p>Dentro de la ventana operativa, cuando no hay nada que hacer la tarjeta muestra <strong>«Sin pedidos pendientes» en gris neutro</strong> — no verde, no oculta.</p>
+  <p>La razón no es estética: <strong>cero pedidos a media mañana es en sí mismo una señal.</strong> Puede ser que no entraron ventas, o que la integración con ML se rompió, y desde afuera se ven igual. Por eso, si sigue en cero <strong>a las 11:00</strong> de un día hábil, la tarjeta pasa a <span class="chip amarillo">amarillo</span> con «0 pedidos — verificar integración». Convierte un silencio en una señal.</p>
+</section>
+
+<!-- 11 -->
+<section id="s11">
+  <h2><span class="num">11</span>Antes de construir: prevención y racionalización</h2>
+  <p class="intro">Dos filtros antes de escribir una tarjeta. El primero pregunta si la tarjeta debería existir; el segundo, cómo tiene que ser si existe.</p>
+
+  <h3>Filtro 1 · La jerarquía de prevención</h3>
+  <p>Shigeo Shingo, en el Sistema de Producción Toyota, formuló la idea que más condiciona este proyecto:</p>
+  <p class="regla">La inspección no previene defectos. Sólo los encuentra después de que ya ocurrieron.</p>
+  <p>Y estableció una jerarquía de soluciones, de más a menos efectiva:</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:6%"></th><th style="width:22%">Nivel</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">1</td><td><strong>Eliminación</strong></td><td>El error no puede ocurrir.</td></tr>
+      <tr><td class="mono">2</td><td><strong>Reemplazo</strong></td><td>Se cambia el proceso por uno donde ese error no existe.</td></tr>
+      <tr><td class="mono">3</td><td><strong>Facilitación</strong></td><td>Se hace tan fácil hacerlo bien que casi nadie falla.</td></tr>
+      <tr><td class="mono">4</td><td><strong>Detección</strong></td><td>Se avisa después de que pasó. <strong>Acá vive el Centro de Operaciones.</strong></td></tr>
+      <tr><td class="mono">5</td><td>Mitigación</td><td>Se limita el daño.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota bloqueo">
+    <p class="titulo">La regla</p>
+    <p><strong>Antes de construir una tarjeta, hay que probar si el proceso se puede diseñar para que el error no ocurra. La tarjeta existe sólo para lo que no se puede prevenir.</strong></p>
+    <p>El Centro entero opera en el nivel 4 — el cuarto de cinco. Eso no está mal, hay cosas que sólo se pueden detectar. Pero significa que <strong>estamos usando la herramienta más débil por defecto</strong>, y hay que preguntarse antes si existe una más fuerte. Cumplir esta regla probablemente reduzca el catálogo, y eso es una buena noticia: menos tarjetas, menos ruido, menos mantenimiento.</p>
+  </div>
+  <p>Un corolario que sale de la misma disciplina, y que aplica directo al cierre de remitos: <strong>un bloqueo que impide la acción incorrecta pero no ofrece un camino para el caso legítimo no previene el error, genera atajos.</strong> Cuando un control obligatorio no se puede cumplir, no se cumple: se rodea. Y ahí los datos se contaminan sin que nadie lo note.</p>
+
+  <h3>Filtro 2 · La ficha de racionalización</h3>
+  <p>Tomado de ISA-18.2. Su exigencia central es que <em>ninguna alarma existe sin una respuesta humana definida</em>, documentada antes de encenderla.</p>
+  <p><strong>Ninguna tarjeta se construye sin completar esta ficha primero.</strong> Es media hoja y filtra la mitad de las malas ideas antes de que cuesten trabajo.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:26%">Campo</th><th>Qué responde</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Causa</strong></td><td>Qué hecho del mundo real hace nacer el hallazgo.</td></tr>
+      <tr><td><strong>Consecuencia</strong></td><td>Qué pasa si nadie actúa. Si no se puede escribir una consecuencia real, la tarjeta no debería existir.</td></tr>
+      <tr><td><strong>Acción correctiva</strong></td><td>Qué hace exactamente la persona. Tiene que ser una acción, no «revisar».</td></tr>
+      <tr><td><strong>Tiempo de respuesta</strong></td><td>Cuánto tiene antes de que sea tarde. De acá salen los umbrales.</td></tr>
+      <tr><td><strong>Condición de cierre</strong></td><td>Qué dato prueba que se resolvió.</td></tr>
+      <tr><td><strong>Dueño y suplente</strong></td><td>Nombres. Sin esto no se construye.</td></tr>
+      <tr><td><strong>Apta para TV</strong></td><td>Sí o no. Ver punto 16.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota">
+    <p class="titulo">La prueba de fuego</p>
+    <p>Si la <em>acción correctiva</em> queda como «mirar», «revisar» o «estar atento», la tarjeta está mal planteada: es información, no una alarma. Va al digest semanal o a Bertok BI, no a la pantalla.</p>
+  </div>
+</section>
+
+<!-- 12 -->
+<section id="s12">
+  <h2><span class="num">12</span>Modelo de datos</h2>
+  <p>Todo el estado vive en <strong><code>ops.db</code></strong> (SQLite, WAL, <code>synchronous=FULL</code>), fuera de OneDrive, junto a <code>picking.db</code>. Prefijo único <code>bertok_ops_*</code>.</p>
+
+  <div class="nota">
+    <p class="titulo">Estado autoritativo, log de auditoría</p>
+    <p>La versión anterior de este documento decía que el estado era una <em>proyección</em> reconstruible desde el registro de eventos. <strong>Se simplifica a propósito:</strong> <code>bertok_ops_hallazgos</code> es la verdad del estado actual, y <code>bertok_ops_eventos</code> es el registro de auditoría. Se escriben las dos, pero el estado no se reconstruye desde cero.</p>
+    <p>El motivo es concreto. En sistemas basados en reconstrucción, <strong>el versionado de eventos es el asesino silencioso</strong>: un replay se frena en eventos que el código actual no puede interpretar, y si se olvida convertir formatos viejos, la proyección <strong>produce datos incorrectos en silencio</strong>. Ese impuesto se paga en cada cambio futuro, y para el tamaño de Bertok no tiene retorno. <strong>La auditabilidad, que es lo que realmente se busca, se conserva entera.</strong></p>
+    <p>Dos precauciones baratas igual, desde el día uno: <strong>un campo <code>version</code> en cada evento</strong>, y la regla de <strong>nunca cambiarle el significado a un tipo de evento existente</strong> — se crea uno nuevo.</p>
+  </div>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:30%">Tabla</th><th>Qué guarda</th><th style="width:15%">Escritura</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">bertok_ops_hallazgos</td><td>Un renglón por clave natural: tipo, datos, nacimiento, estado, prioridad, asignado.</td><td>Proyección</td></tr>
+      <tr><td class="mono">bertok_ops_eventos</td><td>Todo lo que pasó: detección, prioridad, asignación, acuse, posposición, confirmación, cierre, escalado, aviso. Con persona y hora.</td><td>Append-only</td></tr>
+      <tr><td class="mono">bertok_ops_personas</td><td>Padrón sincronizado desde Odoo + PIN local + rol. Nunca se borra un renglón.</td><td>Sync + append</td></tr>
+      <tr><td class="mono">bertok_ops_procesos</td><td>Por tarjeta: dueño, suplente, revisor, umbrales, cadencia, ventana horaria, apta para TV, modo sombra.</td><td>Config</td></tr>
+      <tr><td class="mono">bertok_ops_turnos</td><td>Rotaciones: participantes, cadencia, fecha de inicio, ausencias marcadas.</td><td>Config + append</td></tr>
+      <tr><td class="mono">bertok_ops_corridas</td><td>Cada ejecución de cada detector: cuándo, cuánto tardó, cuántos hallazgos, si falló.</td><td>Append-only</td></tr>
+      <tr><td class="mono">bertok_ops_frescura</td><td>Última actualización conocida de cada fuente.</td><td>Proyección</td></tr>
+      <tr><td class="mono">bertok_ops_calendario</td><td>Feriados nacionales y días no laborables. Carga anual manual, ~20 fechas.</td><td>Config</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>Retención <span class="chip acento">Decidido</span></h3>
+  <p>Con los volúmenes reales de Bertok, <strong><code>ops.db</code> no va a crecer a nada preocupante en años.</strong> No conviene optimizar lo que no es un problema.</p>
+  <ul>
+    <li><strong><code>bertok_ops_eventos</code>: nunca se borra.</strong></li>
+    <li><strong><code>bertok_ops_hallazgos</code>: se conservan todos</strong>, mínimo 13 meses en línea.</li>
+    <li><strong><code>bertok_ops_corridas</code>: 90 días de detalle</strong> y un resumen diario más atrás. Es la única que crece rápido.</li>
+  </ul>
+  <div class="nota">
+    <p class="titulo">Guarda de alcance</p>
+    <p>Se replica la guarda programática de Bertok BI: <strong>toda escritura fuera del prefijo <code>bertok_ops_*</code> se bloquea a nivel código</strong>, no por convención. Y se prueba igual: un set de sentencias destructivas que deben fallar todas.</p>
+  </div>
+  <h3>Por qué un cuarto almacén</h3>
+  <ul>
+    <li><code>ML.db</code> <strong>está dentro de OneDrive.</strong> Varias máquinas escribiendo en simultáneo contra una SQLite sincronizada rompe el WAL y pierde datos — el modo de falla que ya ocurrió varias veces. Es el mismo motivo por el que <code>picking.db</code> vive afuera.</li>
+    <li>El Postgres del VPS es remoto: si se cae internet, el depósito se queda sin centro de operaciones justo cuando más lo necesita.</li>
+    <li><code>picking.db</code> tiene su propio dueño. Mezclar estado de coordinación adentro contamina un sistema en producción.</li>
+  </ul>
+</section>
+
+<!-- 13 -->
+<section id="s13">
+  <h2><span class="num">13</span>Responsables</h2>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:24%">Rol</th><th>Alcance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Dueño del proceso</strong></td><td>Responde por que la tarjeta esté sana. Estable, o por turno.</td></tr>
+      <tr><td><strong>Asignado del hallazgo</strong></td><td>Responde por este caso. Cambia caso a caso.</td></tr>
+      <tr><td><strong>Revisor</strong></td><td>Sólo donde el proceso lo pide: valida antes del cierre.</td></tr>
+      <tr><td><strong>Suplente</strong></td><td>Toma el proceso cuando el dueño no está. Obligatorio.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Los trece procesos <span class="chip acento">Decidido</span></h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:4%">#</th><th style="width:24%">Proceso</th><th style="width:30%">Dueño</th><th style="width:20%">Suplente</th><th>TV</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">01</td><td>Pendientes de cierre — ML</td><td>quien armó el paquete <span class="mono">(por dato)</span></td><td>turno de Despachos</td><td>Sí</td></tr>
+      <tr><td class="mono">02</td><td>Pendientes de cierre — offline</td><td>Federico</td><td>Facundo</td><td>Sí</td></tr>
+      <tr><td class="mono">03</td><td>Despachos del día</td><td>Facundo ↔ Federico <span class="mono">(rotativo diario)</span></td><td>el otro</td><td>Sí</td></tr>
+      <tr><td class="mono">04</td><td>Preguntas ML</td><td>Abril → Facundo → Federico <span class="mono">(rotativo diario)</span></td><td>el siguiente</td><td>Sí</td></tr>
+      <tr><td class="mono">05</td><td>Reclamos ML</td><td>Antonella</td><td>Abril</td><td>Sí</td></tr>
+      <tr><td class="mono">06</td><td>Reposición a Full</td><td>Facundo ↔ Federico <span class="mono">(rotativo por ciclo)</span> · revisa Antonella</td><td>el otro</td><td>Sí</td></tr>
+      <tr><td class="mono">07</td><td>Compras de insumos</td><td>Antonella</td><td>Gerardo</td><td>Sí</td></tr>
+      <tr><td class="mono">08</td><td>Mercado Ads</td><td>Facundo</td><td>Federico</td><td>Sí</td></tr>
+      <tr><td class="mono">09</td><td>Promociones ML</td><td>Facundo</td><td>Federico</td><td>Sí</td></tr>
+      <tr><td class="mono">10</td><td>Google Ads</td><td>Abril</td><td>Antonella</td><td>Sí</td></tr>
+      <tr><td class="mono">11</td><td>Posteo en redes</td><td>Antonella</td><td>Gerardo</td><td>Informativa</td></tr>
+      <tr><td class="mono">12</td><td>Rendición de cuentas</td><td>Antonella</td><td>Abril</td><td><strong>No</strong></td></tr>
+      <tr><td class="mono">13</td><td>Comercio exterior</td><td>Antonella</td><td>Gerardo</td><td><strong>Nunca</strong></td></tr>
+      <tr><td class="mono">—</td><td>Cobranzas <span class="chip rojo">bloqueada</span></td><td>Antonella</td><td>Gerardo</td><td>No</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="nota bloqueo">
+    <p class="titulo">Lo que la tabla revela antes de escribir una línea de código</p>
+    <p><strong>Antonella es dueña de 6 de 13 procesos</strong>, más la revisión de Full — incluidos los dos de mayor riesgo económico de toda la lista, comercio exterior y cobranzas. Si falta una semana, se cae la mitad de Bertok, y hoy eso no se ve en ningún lado.</p>
+    <p><strong>Y Gerardo figura como suplente en cinco.</strong> El objetivo del proyecto era que la empresa dependa menos de él; la tabla dice lo contrario.</p>
+    <p>El Centro no crea ese problema: lo hace visible, que es para lo que sirve. Pero no lo resuelve la arquitectura. Es la decisión abierta más importante de todas.</p>
+  </div>
+
+  <h3>Identidad: Odoo manda, pero no en tiempo real <span class="chip acento">Decidido</span></h3>
+  <ul>
+    <li><strong>Empleados, no contactos.</strong> Odoo tiene 768 contactos importados además de los usuarios. Los responsables salen sólo del padrón de empleados.</li>
+    <li><strong>Sync cada 6 horas</strong>, más un botón de «sincronizar ahora» para Gerardo. El padrón cambia pocas veces al año.</li>
+    <li><strong>Un alta puede esperar; una baja no.</strong> La baja se puede hacer local e inmediata desde el Centro, y el sync posterior la confirma. Si el Centro y Odoo se contradicen, <strong>gana la restricción</strong>.</li>
+    <li><strong>El login valida siempre contra la copia local.</strong> Se cae el VPS, el depósito sigue operando.</li>
+    <li><strong>Login por PIN.</strong> Odoo define <em>quién existe</em>; el Centro define <em>cómo entra</em>.</li>
+    <li><strong>Una persona nunca se borra, se marca inactiva.</strong> Si alguien se va en marzo, en junio hay que poder ver que cerró tal remito.</li>
+  </ul>
+  <div class="nota">
+    <p class="titulo">Oportunidad al mudar Picking</p>
+    <p>Picking tiene hoy su propio padrón con PIN. Como se muda a la misma máquina, <strong>este es el momento de unificarlo</strong>: un solo login para el depósito y el Centro. Hacerlo después cuesta mucho más.</p>
+  </div>
+</section>
+
+<!-- 14 -->
+<section id="s14">
+  <h2><span class="num">14</span>Notificación y escalado</h2>
+  <p class="regla">La tarjeta tiene que poder empujar, no sólo mostrar.</p>
+  <p>Una tarjeta que se pone roja a las 12:45 mientras nadie mira la pantalla es el mismo problema que ya existe, con más infraestructura encima. El canal no se construye: Bertok ya tiene <strong>n8n + WhatsApp Cloud API</strong> en producción, con escalado a supervisor funcionando en Cortex y en Hermes.</p>
+
+  <h3>Tres cosas distintas, no una</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:18%">Categoría</th><th>Qué es</th><th style="width:30%">Dónde va acá</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Aviso</strong></td><td>Requiere acción humana <em>ahora</em>. Debe ser raro.</td><td>WhatsApp. Rojo en pantalla.</td></tr>
+      <tr><td><strong>Ticket</strong></td><td>Requiere acción, pero no inmediata.</td><td>Amarillo en pantalla, sin push.</td></tr>
+      <tr><td><strong>Registro</strong></td><td>Nadie se entera. Queda para análisis.</td><td>Modo sombra y digest semanal.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>Si algo no requiere que alguien deje lo que está haciendo, no manda WhatsApp.</strong> Todo lo demás espera en pantalla.</p>
+
+  <h3>Escalera</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:14%">Nivel</th><th>Cuándo</th><th style="width:32%">A quién</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip gris">0</span></td><td>El hallazgo se vuelve visible.</td><td>Pantalla y modo usuario del asignado.</td></tr>
+      <tr><td><span class="chip amarillo">1</span></td><td>Pasa el umbral propio de la tarjeta.</td><td>WhatsApp al asignado.</td></tr>
+      <tr><td><span class="chip rojo">2</span></td><td>Pasa el umbral de escalado.</td><td>WhatsApp al suplente o supervisor.</td></tr>
+      <tr><td><span class="chip rojo">3</span></td><td>Vence el límite duro, o tercera posposición.</td><td>Gerardo. Sólo acá.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Acuse de recibido <span class="chip acento">Decidido</span></h3>
+  <p>El asignado marca «visto» desde su pantalla. <strong>El reloj del escalado corre desde el acuse, no desde la aparición</strong> — y si no hay acuse dentro del umbral, eso mismo escala. Es lo que distingue «no lo vio» de «lo vio y no lo hizo», que son dos problemas distintos con dos correctivos distintos.</p>
+
+  <h3>Gerardo no debería mirar la pantalla</h3>
+  <ul>
+    <li><strong>Nivel 3 por excepción</strong>, en el momento, por WhatsApp.</li>
+    <li><strong>Un digest semanal</strong>: qué se resolvió a tiempo, qué se escaló, qué proceso está sistemáticamente atrasado y de quién es. Eso es control del sistema, no de las tareas.</li>
+  </ul>
+</section>
+
+<!-- 15 -->
+<section id="s15">
+  <h2><span class="num">15</span>Auditoría</h2>
+  <p>No es un módulo aparte: es consecuencia de que <code>bertok_ops_eventos</code> sea append-only y de que cada hallazgo tenga clave natural. Sin que nadie cargue nada extra, el sistema responde qué debía hacerse y de quién era, cuánto estuvo pendiente, si se vio y cuándo, si se pospuso y cuántas veces, quién lo resolvió y si fue cierre automático o confirmado, a quién se avisó, y cuántas veces se reabrió el mismo caso.</p>
+  <p>Se aplica el principio que Bertok ya le exige a Bertok BI: <strong>todo indicador debe poder responder «¿de dónde salió este número?» con una cadena explícita hasta la fuente.</strong></p>
+  <h3>Correctivos <span class="chip amarillo">Con precaución</span></h3>
+  <p>El correctivo queda documentado y puede ser una suspensión o un descuento. Eso convierte a <code>ops.db</code> en una base con <strong>información laboral sensible</strong>. Recomendación:</p>
+  <ul>
+    <li><strong>Guardar lo mínimo:</strong> que hubo un correctivo, su fecha y una referencia. <strong>El detalle, el monto y el motivo van al legajo, fuera del Centro.</strong></li>
+    <li><strong>Nunca en la TV</strong>, y visible sólo para Gerardo.</li>
+    <li><strong>Consultarlo con el contador o abogado laboral antes de implementarlo.</strong> La Ley 25.326 regula los archivos con datos de empleados, con deberes de registro y régimen de sanciones, y el uso de registros de desempeño en una sanción tiene implicancias que exceden lo técnico.</li>
+  </ul>
+  <p>Lo demás —cumplimiento, demoras, posposiciones— es dato operativo normal y no tiene este problema.</p>
+</section>
+
+<!-- 16 -->
+<section id="s16">
+  <h2><span class="num">16</span>Seguridad y reserva</h2>
+
+  <h3>Qué se ve en la TV <span class="chip acento">Decidido</span></h3>
+  <p>La TV está en la oficina grande donde trabajan los vendedores y se arman los pedidos. Muestra <strong>todas las tarjetas marcadas como aptas para TV</strong>, sin filtrar por persona. En cada PC, la persona logueada ve <strong>lo asignado a ella más todo lo de los procesos de los que es dueña</strong> — si no ve lo de su proceso asignado a otros, no puede supervisar.</p>
+  <div class="nota bloqueo">
+    <p class="titulo">Tres tarjetas no van a la TV</p>
+    <p><strong>Comercio exterior · nunca.</strong> Contiene la distinción entre <strong>PI Real y PI Declarada</strong>, la información más sensible de Bertok. Modo usuario, acceso restringido a Gerardo y Antonella. Esto es una regla, no una recomendación.</p>
+    <p><strong>Rendición de cuentas.</strong> El Centro registra que el viernes hay un informe para Fernando —socio de Gerardo— y si se hizo. <strong>No registra montos, conceptos ni conciliaciones</strong> — y no se construye detección ni seguimiento de esos importes. Un registro append-only, fechado, con nombres de empleados y respaldado a diario es el peor contenedor posible para esa información; lo que hace valioso al Centro para la operación es exactamente lo que lo hace pésimo para esto. La tarjeta cumple igual su función: avisa si el viernes pasó sin informe.</p>
+    <p><strong>Cobranzas.</strong> Nombres de clientes y montos en una pantalla permanente por la que pasa gente de afuera.</p>
+  </div>
+
+  <h3>Autenticación y permisos</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:26%">Riesgo</th><th>Medida</th></tr></thead>
+    <tbody>
+      <tr><td><strong>PIN adivinable</strong></td><td>Un PIN de 4 dígitos son 10.000 combinaciones: sin bloqueo se rompe en segundos. OWASP recomienda <strong>bloqueo tras 3 a 5 intentos fallidos</strong>, más límite de tasa en el login. Los intentos fallidos quedan en la auditoría.</td></tr>
+      <tr><td><strong>Roles abiertos</strong></td><td>El Centro <strong>nace con roles cerrados</strong>, no los abre «hasta depurar». Sólo Gerardo cambia configuración. Si cualquiera puede subir un umbral, el sistema se autodesactiva solo y en silencio.</td></tr>
+      <tr><td><strong>PIN compartido</strong></td><td>El modo de falla más probable en un depósito, y arruina toda la auditoría. Se combate haciendo el login barato y midiéndolo: dos sesiones simultáneas del mismo PIN en máquinas distintas es una anomalía detectable.</td></tr>
+      <tr><td><strong>Acceso remoto</strong></td><td>RustDesk ya está en todas las PC y en el servidor. Contraseña fuerte y distinta por máquina. <strong>No exponer el puerto del Centro a internet</strong>: el acceso remoto pasa por RustDesk.</td></tr>
+      <tr><td><strong>Backups sensibles</strong></td><td>Van a OneDrive, que es una cuenta compartida. Otra razón para guardar lo mínimo en correctivos y comercio exterior.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 17 -->
+<section id="s17">
+  <h2><span class="num">17</span>Relación con cada sistema</h2>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:20%">Sistema</th><th style="width:13%">Acceso</th><th>Qué usa el Centro</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ML.db</strong></td><td><span class="chip gris">Lectura</span></td><td><strong>Única fuente de datos de Mercado Libre.</strong> El Centro nunca llama a la API de ML. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>bertok_bi_*</strong></td><td><span class="chip gris">Lectura</span></td><td>Rentabilidad, rotación, ABC, demanda. No se recalcula nada.</td></tr>
+      <tr><td><strong>picking.db</strong></td><td><span class="chip gris">Lectura</span></td><td>Pedidos, escaneos, bultos, órdenes, documentos, auditoría. Base de Despachos, Pendientes de cierre y el cierre de Full.</td></tr>
+      <tr><td><strong>05 · Compras</strong></td><td><span class="chip gris">Lectura</span></td><td>Hitos de container: anticipo, saldo, embarque, arribo. Ya existe el plan de abastecimiento a 12 meses. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>Motor de precios</strong></td><td><span class="chip amarillo">A construir</span></td><td>Promociones ML necesita saber si el precio con descuento respeta las reglas. <strong>Hay que agregarle al motor una salida con el precio mínimo por SKU</strong>, que el Centro lee como una tabla más. Ver decisión 02.</td></tr>
+      <tr><td><strong>Hermes</strong></td><td><span class="chip verde">Ingestor</span></td><td>Vuelca sus preguntas a <code>ML.db</code>. Y <strong>el Centro pasa a ser la cara visible de Hermes v2</strong>. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>Contabilium</strong></td><td><span class="chip gris">Lectura</span></td><td>Vía los Excel que ya baja el scraper. El Centro no hace scraping propio.</td></tr>
+      <tr><td><strong>Odoo</strong></td><td><span class="chip gris">Lectura</span></td><td>Padrón de empleados, sync cada 6 h a caché local.</td></tr>
+      <tr><td><strong>n8n</strong></td><td><span class="chip verde">Entrada y salida</span></td><td>Webhook de salida para WhatsApp. Y <strong>de entrada: las notificaciones de Mercado Libre.</strong> ML recomienda explícitamente sus webhooks en lugar de consultar la API para reclamos, y advierte que los límites de tasa son compartidos y opacos — «incluso una frecuencia baja puede activar límites». El camino es <strong>ML → webhook → n8n → <code>ML.db</code> → el Centro lee</strong>. n8n nunca escribe en <code>ops.db</code>.</td></tr>
+      <tr><td><strong>Scripts existentes</strong></td><td><span class="chip gris">Lectura</span></td><td>El Centro no dispara <code>actualizar_ml.py</code> ni el downloader. Los observa y avisa si no corrieron.</td></tr>
+      <tr><td><strong>Bertok BI</strong></td><td><span class="chip verde">Recíproco</span></td><td>El Centro lee <code>bertok_bi_*</code>. Más adelante BI podrá leer <code>bertok_ops_*</code> para medir cumplimiento.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 18 -->
+<section id="s18">
+  <h2><span class="num">18</span>Infraestructura</h2>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:26%">Pieza</th><th>Definición</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Servidor</strong></td><td>PC dedicada, siempre encendida. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>Migración de Picking</strong></td><td>Picking se muda a la misma PC. Le da hardware propio al Centro y saca a Picking de la máquina de Gerardo y del Python compartido con ZKBioTime. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>Actualización de datos</strong></td><td><code>actualizar_ml.py</code>, el downloader de Contabilium y el <code>.bat</code> unificador <strong>corren en la PC dedicada</strong>. El Centro lee el archivo local, no el sincronizado. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>Ollama y generación de imágenes</strong></td><td><strong>En otra PC.</strong> <span class="chip acento">Decidido</span> Ver abajo.</td></tr>
+      <tr><td><strong>Stack</strong></td><td>Idéntico al de Picking: Python + FastAPI + SQLite + HTML/JS sin frameworks. Cero dependencias nuevas.</td></tr>
+      <tr><td><strong>Bases</strong></td><td><code>ops.db</code> y <code>picking.db</code> fuera de OneDrive, WAL, <code>synchronous=FULL</code>. <span class="chip acento">Decidido</span> Más los pragmas de concurrencia, abajo.</td></tr>
+      <tr><td><strong>TV</strong></td><td>Conectada directo a una salida de video del servidor. Navegador en kiosco, sólo lectura, refresco automático, <strong>con reloj de último refresco visible</strong>. <span class="chip acento">Decidido</span></td></tr>
+      <tr><td><strong>UPS</strong></td><td><span class="chip amarillo">Enero.</span> Ver abajo.</td></tr>
+      <tr><td><strong>Acceso remoto</strong></td><td>RustDesk, ya instalado. <span class="chip acento">Decidido</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="nota bloqueo">
+    <p class="titulo">Pragmas de SQLite · y una hipótesis sobre por qué se cae Picking</p>
+    <p>Bajo WAL, <strong><code>busy_timeout</code> importa más que cualquier otra cosa</strong>: sin él, una escritura concurrente <strong>falla al instante</strong> en vez de esperar el lock. Se reporta que activarlo solo baja las caídas en producción cerca de un 40%. Configuración mínima para las dos bases:</p>
+    <ul>
+      <li><code>busy_timeout</code> de 3 a 5 segundos.</li>
+      <li><code>BEGIN IMMEDIATE</code> en las transacciones de escritura — sin eso se puede recibir <code>SQLITE_BUSY</code> igual, haya timeout o no.</li>
+      <li><code>wal_autocheckpoint</code> en un valor razonable (~1000 páginas), para que los checkpoints sean incrementales y no un bloqueo de golpe.</li>
+      <li>WAL permite lectores y escritor a la vez, pero <strong>sigue habiendo un solo escritor</strong>. El diseño no debe suponer lo contrario.</li>
+    </ul>
+    <p><strong>Hipótesis a verificar en Fase 0:</strong> Picking se cae solo por causa desconocida, y lo usan varios celulares en simultáneo contra una SQLite. Si no tiene <code>busy_timeout</code> configurado, ese es exactamente el síntoma que produciría — fallas esporádicas, sin patrón, bajo concurrencia. No está afirmado, pero es barato de comprobar y sería la explicación más simple de una deuda que lleva meses.</p>
+  </div>
+
+  <div class="nota">
+    <p class="titulo">La TV, funcionando 24/7</p>
+    <ul>
+      <li><strong>Reinicio programado</strong> en horario no operativo (semanal o diario de madrugada) para limpiar fugas de memoria del navegador. Es la práctica estándar y es gratis.</li>
+      <li><strong>Refresco programado de la página</strong>, además del reloj de último refresco.</li>
+      <li><strong>Watchdog que reinicie el navegador</strong> si se cuelga, no sólo el servidor.</li>
+      <li><strong>Burn-in:</strong> pantalla completa, sin barra de tareas ni pestañas, y apagado nocturno programado. Acá el diseño ayuda solo: <strong>un tablero donde las tarjetas aparecen y desaparecen por prioridad castiga mucho menos la pantalla que un dashboard fijo.</strong> Lo único estático es el encabezado.</li>
+    </ul>
+  </div>
+
+  <div class="nota bloqueo">
+    <p class="titulo">Por qué Ollama va en otra máquina</p>
+    <p>Picking se movió de la PC de Gerardo porque <strong>compartía la instalación de Python con ZKBioTime y eso ya había generado efectos colaterales</strong>. Poner generación de imágenes y video en la PC que corre Picking y el Centro es la misma decisión con ropa nueva, y peor: la generación consume GPU, RAM y CPU en ráfagas largas. Si arranca a las 12:40 mientras el depósito arma los pedidos de Flex, Picking se pone lento o se cae — y Picking ya se cae solo por causa desconocida, así que sumarle un vecino ruidoso hace ese problema imposible de diagnosticar.</p>
+    <p><strong>La PC servidor tiene un solo trabajo: no estar caída entre las 9 y las 15:30.</strong> Todo lo que compita con eso va a otro lado. La PC actual de Gerardo queda libre al mudarse Picking, y es el candidato natural.</p>
+  </div>
+
+  <div class="nota pendiente">
+    <p class="titulo">UPS · postergada a enero</p>
+    <p>SQLite en modo WAL está diseñado para sobrevivir cortes de energía: lo que se puede perder son las últimas transacciones, no la base. Con <code>synchronous=FULL</code> —que va desde el día uno y es gratis— esa ventana se cierra, y el backup diario es la red de seguridad.</p>
+    <p>La exposición real sin UPS <strong>no es la base: es la disponibilidad.</strong> Se corta la luz un martes a las 11 y el depósito se queda sin Picking hasta que vuelva. Eso es lo que la UPS compra.</p>
+  </div>
+
+  <div class="nota bloqueo">
+    <p class="titulo">Backup · una SQLite en WAL no se copia con un copy</p>
+    <p>Son tres archivos (<code>.db</code>, <code>.db-wal</code>, <code>.db-shm</code>). Copiar el <code>.db</code> con transacciones en vuelo produce una base incompleta, y no se nota hasta el día que hace falta. El script diario hace <code>VACUUM INTO</code> —que genera un archivo único, consistente y cerrado sin frenar la operación— y recién <em>ese</em> archivo se copia a OneDrive.</p>
+    <p><strong>Rotación:</strong> 7 diarios + 4 semanales, nunca pisar el mismo archivo. <strong>Restauración de prueba una vez por mes.</strong> Un backup que nunca se restauró no es un backup.</p>
+  </div>
+
+  <h3>Plan B <span class="chip acento">Decidido</span></h3>
+  <ol>
+    <li><strong>Backup diario</strong> con el esquema de arriba.</li>
+    <li><strong>Procedimiento en papel para el depósito</strong>: una hoja impresa con qué hacer si el sistema no está — armar contra el listado de ML impreso, anotar los EAN a mano, cargarlos después.</li>
+  </ol>
+  <p><strong>Se descarta la PC de repuesto fría.</strong> Consecuencia honesta: si la máquina no arranca, el tiempo de recuperación pasa de aproximadamente una hora a varios días, y durante ese tiempo el depósito trabaja con el procedimiento en papel. Mitigación gratis: <strong>tener escrito el procedimiento de instalación</strong> y los instaladores guardados en OneDrive, para que reconstruir el servidor no dependa de que alguien se acuerde de cómo se armó.</p>
+  <p>Y en los dos casos: <strong>el plan B se prueba una vez, a propósito, un sábado.</strong> Un plan B no probado no existe.</p>
+</section>
+
+<!-- 19 -->
+<section id="s19">
+  <h2><span class="num">19</span>Salud de datos y modos de falla</h2>
+  <p class="regla">Una pantalla en verde sobre datos de anteayer es peor que no tener pantalla.</p>
+  <ul>
+    <li><strong>Cada hallazgo lleva su <code>datos_al</code>.</strong> No se muestra un número sin decir de cuándo es.</li>
+    <li><strong>Un detector que falla no deja la tarjeta en verde: la deja en gris «sin datos».</strong> Verde significa «miré y está bien»; gris significa «no pude mirar».</li>
+    <li><strong>Si un detector falla N corridas seguidas, escala.</strong> Un centro de operaciones ciego tiene que avisar que está ciego.</li>
+  </ul>
+  <h3>Tolerancia por fuente <span class="chip acento">Decidido</span></h3>
+  <p>Una tolerancia única no funciona: si los Excel de Contabilium se bajan una vez por día, una hora los deja permanentemente en rojo y en dos semanas nadie mira la tarjeta de salud.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:34%">Fuente</th><th style="width:24%">Tolerancia</th><th>Criterio</th></tr></thead>
+    <tbody>
+      <tr><td><code>picking.db</code></td><td>15 min</td><td>Es local y está viva.</td></tr>
+      <tr><td><code>ML.db</code></td><td>1 hora</td><td>Se puede bajar a 30 min con el uso.</td></tr>
+      <tr><td>Excel de Contabilium</td><td>su cadencia + margen</td><td>Si baja 1 vez por día → 26 h.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota pendiente">
+    <p class="titulo">El caso que la TV negra no cubre</p>
+    <p>La TV conectada directo al servidor cubre «la máquina murió»: se ve negra. <strong>No cubre la PC viva con el Centro colgado</strong> — ahí muestra la última página cargada, con datos de hace horas, en verde. Indistinguible de «todo bien», y es el peor resultado posible. El <strong>reloj en pantalla</strong> resuelve la mayor parte: si se congela, se ve al instante desde el otro lado de la oficina. El <strong>latido externo</strong> hacia n8n queda <span class="chip rojo">pendiente</span> y cierra el resto: el vigilante tiene que estar afuera del vigilado.</p>
+  </div>
+</section>
+
+<!-- 20 -->
+<section id="s20">
+  <h2><span class="num">20</span>Modo sombra, calidad y umbrales</h2>
+  <p class="intro">Este punto existe por el dato del capítulo 04: los equipos que reciben muchas alertas de baja calidad no responden peor a las malas — <strong>dejan de responder a todas</strong>.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:24%">Etapa</th><th>Qué pasa</th><th style="width:26%">Cómo se avanza</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip rojo">Sombra</span></td><td>El detector corre y registra. <strong>No se muestra ni se avisa a nadie.</strong></td><td>Mínimo 2 ciclos completos del proceso.</td></tr>
+      <tr><td><span class="chip amarillo">Visible sin push</span></td><td>Aparece en pantalla. No manda WhatsApp.</td><td>Se revisa con el dueño: qué era real y qué era ruido.</td></tr>
+      <tr><td><span class="chip verde">Completa</span></td><td>Push y escalado activos.</td><td>Una persona la usó y sirvió.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>El modo sombra tiene un segundo uso tan importante como el primero: <strong>de ahí salen los umbrales.</strong> Nadie puede saber de antemano a partir de cuántos días un remito abierto es un problema. Dos semanas de datos en sombra lo dicen.</p>
+  <h3>Métricas del sistema sobre sí mismo</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:32%">Métrica</th><th>Qué significa que esté mal</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Avisos por día y persona</strong></td><td>Si una tarjeta genera más de un puñado de pushes por día, <strong>la tarjeta está rota, no el equipo</strong>.</td></tr>
+      <tr><td><strong>Tasa de acción</strong></td><td>Qué proporción de hallazgos visibles terminó en una acción real. Si es baja, detecta cosas que no importan.</td></tr>
+      <tr><td><strong>Tasa de posposición</strong></td><td>Muchas posposiciones sobre la misma tarjeta significan umbral demasiado temprano, no gente desprolija.</td></tr>
+      <tr><td><strong>Tiempo hasta el acuse</strong></td><td>Si nadie ve nada en dos horas, el canal está mal elegido o la pantalla está en el lugar equivocado.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="regla">Una tarjeta que grita en falso se apaga. No se tolera, no se ignora: se apaga y se rediseña.</p>
+
+  <h3>Los tres umbrales</h3>
+  <p>Cada tarjeta necesita tres números. No son tres formas de lo mismo: el primero decide <em>qué es un problema</em>, el segundo <em>cuándo molestar a alguien</em>, el tercero <em>cuándo el asignado dejó de alcanzar</em>.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:20%">Umbral</th><th>Qué dispara</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Visible</strong></td><td>Desde que nace el hallazgo hasta que aparece en pantalla.</td></tr>
+      <tr><td><strong>Aviso</strong></td><td>Hasta que manda WhatsApp al asignado.</td></tr>
+      <tr><td><strong>Escalado</strong></td><td>Hasta que sube al suplente o supervisor.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Por qué no se pueden inventar, con un caso real: Pendientes de cierre offline nace cuando se despacha un envío por expreso sin remito cargado. <strong>Si el umbral es 1 día y el expreso devuelve los remitos a los tres, aparecen todos los envíos siempre</strong> — cien por ciento de ruido, y la tarjeta muere en una semana. <strong>Si el umbral es 10 días, cuando aparece el remito ya se perdió.</strong> El número correcto está en el medio y hoy nadie lo sabe, porque nunca se midió.</p>
+
+  <h4>Tres orígenes distintos</h4>
+  <ul>
+    <li><strong>Externo — lo impone un tercero.</strong> No se elige, se acata: la moto pasa 13:30, Mercado Envíos cierra 15:00, el anticipo del container vence tal día, ML tiene sus propios tiempos de respuesta con impacto en la reputación. Acá el umbral ya existe: sólo hay que averiguarlo bien.</li>
+    <li><strong>De política — lo decide Gerardo.</strong> Insumos cada 10 días, 4 posteos por mes, Google Ads semanal, Full cada 15 días.</li>
+    <li><strong>Derivado — sale de la distribución observada.</strong> Es el que necesita el modo sombra.</li>
+  </ul>
+  <p class="regla">El umbral derivado se pone donde los casos normales ya terminaron: el percentil 80 o 90 de lo que sí se resolvió. Arriba de ahí es genuinamente anormal.</p>
+  <p>Si la sombra muestra que el 85% de los remitos que se cierran se cierran dentro de los 4 días, <strong>el día 5 es donde empieza lo anormal</strong>. No es una opinión, es una lectura. Es el campo <em>tiempo de respuesta</em> de la ficha de racionalización, pero <strong>medido en vez de adivinado</strong>.</p>
+
+  <h4>Hipótesis de arranque</h4>
+  <p>Estos números <strong>no son recomendaciones</strong>: son el punto de partida contra el que la sombra va a comparar, y se reemplazan por los reales con el dueño de cada proceso presente.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:28%">Tarjeta</th><th style="width:18%">Visible</th><th style="width:18%">Aviso</th><th style="width:18%">Escalado</th><th>Origen</th></tr></thead>
+    <tbody>
+      <tr><td>Pendientes de cierre — offline</td><td>~4 días</td><td>~7 días</td><td>~10 días</td><td>Derivado</td></tr>
+      <tr><td>Pendientes de cierre — ML</td><td>~1 día</td><td>~2 días</td><td>~4 días</td><td>Derivado</td></tr>
+      <tr><td>Despachos del día</td><td colspan="3"><strong>por proyección</strong> — «al ritmo actual no llegás», no un plazo fijo</td><td>Externo</td></tr>
+      <tr><td>Preguntas ML</td><td>~30 min</td><td>~2 h</td><td>~4 h</td><td>Externo (ML)</td></tr>
+      <tr><td>Reclamos ML</td><td>~4 h</td><td>~1 día</td><td>~2 días</td><td>Externo (ML)</td></tr>
+      <tr><td>Mercado Ads</td><td>inmediato</td><td>~1 día</td><td>~3 días</td><td>Derivado</td></tr>
+      <tr><td>Compras de insumos</td><td>día 10</td><td>día 12</td><td>día 14</td><td>Política</td></tr>
+      <tr><td>Reposición a Full · hito 1</td><td>T−7</td><td>T−5</td><td>T−4</td><td>Externo (ML)</td></tr>
+      <tr><td>Comercio exterior</td><td>T−15</td><td>T−7</td><td>T−3</td><td>Externo</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Tope de trabajo en curso: no ponerlo todavía <span class="chip acento">Decidido</span></h3>
+  <p>Es cuántos hallazgos puede tener una persona en <code>en_curso</code> al mismo tiempo. Sin tope aparece el patrón de agarrar ocho cosas y no terminar ninguna, que además <strong>rompe la señal</strong>: todo figura «en curso», nada avanza, y el tablero miente diciendo que se está trabajando.</p>
+  <p>Pero <strong>un tope que nunca se toca es puro estorbo.</strong> En la mayoría de los procesos una persona va a tener uno o dos hallazgos abiertos. Entonces:</p>
+  <ol>
+    <li><strong>Arrancar sin tope.</strong></li>
+    <li><strong>Medir</strong> cuántos hallazgos tiene cada persona en <code>en_curso</code> al cierre del día — el sistema ya va a tener ese número sin esfuerzo.</li>
+    <li><strong>Si es 1 o 2 rutinariamente</strong>, no hace falta tope nunca y la decisión se cierra.</li>
+    <li><strong>Si aparece alguien con 8</strong>, ahí se pone, y el número sale de lo observado.</li>
+  </ol>
+</section>
+
+<!-- 21 -->
+<section id="s21">
+  <h2><span class="num">21</span>Catálogo de tarjetas</h2>
+  <p class="intro">Ordenadas por <strong>(valor × dato disponible hoy) ÷ riesgo</strong>, no por dolor percibido.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:4%">#</th><th style="width:20%">Tarjeta</th><th style="width:12%">Tipo</th><th style="width:24%">Dato</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">1</td><td><strong>Pendientes de cierre</strong></td><td>Informativa</td><td><span class="mono">picking.db</span></td><td><span class="chip verde">Sin bloqueos</span> · rebanada vertical</td></tr>
+      <tr><td class="mono">2</td><td><strong>Despachos del día</strong></td><td>Informativa<br>con proyección</td><td><span class="mono">picking.db</span> + <span class="mono">ML.db</span></td><td><span class="chip verde">Definida</span> · dos cortes</td></tr>
+      <tr><td class="mono">3</td><td><strong>Mercado Ads</strong></td><td>De excepción</td><td><span class="mono">ML.db</span> + motor de precios</td><td><span class="chip verde">Alto valor</span> · plata por hallazgo</td></tr>
+      <tr><td class="mono">4</td><td><strong>Compras de insumos</strong></td><td>Calendario</td><td>ninguno · cada 10 días</td><td><span class="chip verde">La más barata</span></td></tr>
+      <tr><td class="mono">5</td><td><strong>Comercio exterior</strong></td><td>Multi-hito</td><td><span class="mono">05 · Compras</span></td><td><span class="chip amarillo">Mayor plata en juego</span></td></tr>
+      <tr><td class="mono">6</td><td><strong>Reposición a Full</strong></td><td>4 hitos</td><td><span class="mono">ML.db</span> + <span class="mono">bertok_bi_*</span></td><td><span class="chip amarillo">Ver punto 22</span></td></tr>
+      <tr><td class="mono">7</td><td><strong>Preguntas ML</strong></td><td>Informativa</td><td><span class="mono">ML.db</span> vía Hermes</td><td><span class="chip verde">Es Hermes v2</span></td></tr>
+      <tr><td class="mono">8</td><td><strong>Promociones ML</strong></td><td>Ventana + cálculo</td><td>API ML + motor de precios</td><td><span class="chip amarillo">Falta la interfaz</span></td></tr>
+      <tr><td class="mono">9</td><td><strong>Reclamos ML</strong></td><td>Informativa</td><td><span class="mono">ML.db</span></td><td><span class="chip amarillo">Verificar ingesta</span></td></tr>
+      <tr><td class="mono">10</td><td><strong>Rendición de cuentas</strong></td><td>Calendario</td><td>ninguno · viernes</td><td><span class="chip verde">Sin contenido</span></td></tr>
+      <tr><td class="mono">11</td><td><strong>Google Ads</strong></td><td>Calendario</td><td>ninguno · semanal</td><td><span class="chip verde">Simple</span></td></tr>
+      <tr><td class="mono">12</td><td><strong>Posteo en redes</strong></td><td>Medidor</td><td>ninguno · 4 por mes</td><td><span class="chip gris">Última · sin push</span></td></tr>
+      <tr><td class="mono">—</td><td><strong>Cobranzas</strong></td><td>De acción</td><td><strong>no existen</strong></td><td><span class="chip rojo">Bloqueada</span> · falta Finanzas</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1 · Pendientes de cierre — la primera</h3>
+  <p>Todos los datos están en <code>picking.db</code>: cero ingesta nueva, ninguna regla de negocio nueva, cero riesgo externo. Prueba el motor entero —detector, clave natural, estados, pantalla, aviso, auditoría— sin poner nada en riesgo. Tiene dos sub-tipos con asignación distinta (punto 08).</p>
+
+  <h4>El problema, bien planteado</h4>
+  <p>El remito <strong>siempre se emite</strong>: eso no falla. Y Picking <strong>ya exige foto y número de remito para cerrar un pedido</strong>, así que el control de nivel 2 ya existe y no hay que agregarlo. Lo que falla está afuera: el papel sale con el expreso o con el cliente y muchas veces <strong>no vuelve, o vuelve sin firmar</strong>.</p>
+  <p>Son <strong>tres problemas distintos que hoy se ven iguales</strong>, y esa confusión es el nudo:</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:6%"></th><th style="width:36%">Dónde falla</th><th>¿Bajo control de Bertok?</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">a</td><td>El expreso o el cliente <strong>nunca firma</strong></td><td>No — es conducta de un tercero.</td></tr>
+      <tr><td class="mono">b</td><td>Firma pero <strong>no lo devuelve</strong></td><td>No — ídem.</td></tr>
+      <tr><td class="mono">c</td><td>Vuelve y <strong>nadie lo carga</strong></td><td>Sí — se resuelve con facilitación.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>El 40-50% es una hipótesis, no un dato.</strong> Ese número surgió durante la depuración de Picking, con la gente aprendiendo el flujo y las reglas en ajuste, así que puede estar inflado por la propia etapa. Aunque sea la mitad sigue siendo grave, pero se mide antes de diseñar contra él.</p>
+
+  <div class="nota bloqueo">
+    <p class="titulo">El arreglo va en Picking, no en una tarjeta</p>
+    <p>Picking exige la prueba para cerrar, pero <strong>no ofrece un camino legítimo para cuando esa prueba genuinamente no va a llegar</strong> — que es la mitad de los casos y no es culpa de nadie de adentro. Un control obligatorio que no se puede cumplir no se cumple: se rodea. La solución es cerrar <strong>con niveles de prueba</strong>, no cerrar o no cerrar:</p>
+  </div>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:8%">Nivel</th><th style="width:44%">Qué se cargó</th><th>Peso probatorio</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A</strong></td><td>Remito firmado — foto + número</td><td>Alto. Es el ideal.</td></tr>
+      <tr><td><strong>B</strong></td><td>Constancia del expreso — guía + acuse de entrega</td><td>Medio-alto. <strong>No depende de que vuelva el papel.</strong></td></tr>
+      <tr><td><strong>C</strong></td><td>Confirmación del cliente por WhatsApp</td><td>Medio. La infraestructura ya existe y cuesta casi cero.</td></tr>
+      <tr><td><strong>D</strong></td><td>Sin prueba — con motivo escrito y autorización</td><td>Bajo. <strong>Es una incidencia, no un cierre normal.</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Con esto el pedido <strong>siempre se puede cerrar honestamente</strong>, nadie necesita inventar nada, y lo que se mide deja de ser «cuántos cerraron» para pasar a ser <strong>«con qué calidad cerraron»</strong>. El nivel D existe, pero cuenta: no es gratis y no es invisible.</p>
+  <p>Como Picking todavía está en depuración, <strong>esto entra ahí, en Fase 0</strong>, y no en el Centro. La separación queda limpia: <strong>Picking resuelve, el Centro mide.</strong></p>
+
+  <div class="nota">
+    <p class="titulo">El reframe: la tarjeta es un scorecard de proveedores</p>
+    <p>Si el problema principal resulta ser (a) o (b), entonces la tarjeta no es un recordatorio, es una medición: <strong>¿qué expreso devuelve los remitos firmados y cuál no?</strong></p>
+    <p>Si un expreso devuelve el 95% y otro el 40%, eso no se arregla insistiéndole a nadie de adentro: <strong>se arregla renegociando o cambiando de expreso.</strong> Es una conversación que hoy no se puede tener porque no existe el número. Lo mismo con clientes que nunca firman: es información comercial.</p>
+    <p><strong>Consecuencia de diseño:</strong> el hallazgo debe llevar <strong>el expreso y el cliente como atributos</strong>, no sólo el número de remito. Sin eso el scorecard es imposible después. Y el modo sombra tiene que <strong>separar las tres causas desde el día uno</strong>: al cabo de dos semanas se sabrá si es un problema interno de carga o un problema de proveedores — que es justamente la pregunta que hoy no se puede responder, y de la que depende qué solución corresponde.</p>
+  </div>
+  <p>Y una última: <strong>si el remito digital de ARCA alcanza a Bertok</strong>, el problema del papel que no vuelve podría desaparecer entero. Eso sería nivel 1 —eliminación— regalado por la normativa. Razón de más para hacer esa consulta antes de arrancar (punto 25).</p>
+
+  <h3>2 · Despachos del día</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:26%">Definición</th><th>Valor <span class="chip acento">Decidido</span></th></tr></thead>
+    <tbody>
+      <tr><td>Corte Flex</td><td>Venta hasta <strong>13:00</strong> (corte de ML). La moto pasa <strong>13:30</strong>.</td></tr>
+      <tr><td>Corte Mercado Envíos</td><td>Hasta las <strong>15:00</strong>. Lo lleva Bertok al punto de envío.</td></tr>
+      <tr><td>«Hoy» termina</td><td>13:00.</td></tr>
+      <tr><td>«Listo» significa</td><td><strong>Orden emitida y bultos cerrados.</strong> No «etiqueta impresa» (se reimprime, no prueba nada) ni «escaneo completo» (falta embalar).</td></tr>
+      <tr><td>Ventana</td><td><strong>Lunes a sábado.</strong> Domingos y feriados no corre.</td></tr>
+      <tr><td>Cero pedidos</td><td>Pasa a amarillo si sigue en cero a las <strong>11:00</strong> de un día hábil.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="intro" style="font-size:15px">A verificar en modo sombra: si el sábado rige el mismo horario de corte que de lunes a viernes.</p>
+</section>
+
+<!-- 22 -->
+<section id="s22">
+  <h2><span class="num">22</span>Reposición a Full</h2>
+  <p class="intro">Merece sección propia: es la única tarjeta con plazo de días, cálculo económico real, dependencia física y plata en juego en las dos direcciones.</p>
+  <div class="ciclo-marco">
+    <div class="ciclo">
+      <div class="paso"><span class="n">1 · Decidir</span><span class="q">Qué SKU y cuánto. T−7 o antes.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">2 · Generar</span><span class="q">Crear el envío en ML, bajar etiquetas, fijar recolección. T−4 mín.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">3 · Armar</span><span class="q">Escaneo, bultos, etiquetado, en Picking.</span></div>
+      <div class="entre">→</div>
+      <div class="paso"><span class="n">4 · Recolección</span><span class="q">ML retira. Cierra con el acuse del inbound.</span></div>
+    </div>
+  </div>
+  <p>Es <strong>una tarjeta con cuatro hitos, no cuatro tarjetas</strong>: es un solo proceso y partirlo genera cuatro cosas que nadie mira enteras. Pero cada hito tiene su propio vencimiento y su propio rojo. Las etiquetas de bulto y de producto salen de la plataforma de ML, y el envío se puede programar hasta un mes antes con un mínimo de cuatro días.</p>
+
+  <div class="nota">
+    <p class="titulo">Cómo cierra el hito 3 sin escribir en ningún lado</p>
+    <p>El Centro <strong>produce la lista</strong>, una persona la carga en Picking, y el Centro <strong>cierra el hito por detección</strong>: ve el pedido terminado en <code>picking.db</code> y lo da por cumplido. Consigue lo mismo que buscaba la excepción de escritura que se descartó —que no dependa de que alguien apriete un botón— pero por lectura pura.</p>
+  </div>
+
+  <div class="nota pendiente">
+    <p class="titulo">La fecha de recolección no puede caer en sábado ni feriado</p>
+    <p>Se define en el hito 2 y genera horas extras si cae mal. El sistema necesita el <strong>calendario de feriados nacionales</strong> (<code>bertok_ops_calendario</code>) y tiene que <strong>advertir al momento de elegir la fecha</strong>, no después.</p>
+  </div>
+
+  <h3>Cuánto enviar</h3>
+  <p>Hoy se define a ojo. Es un problema clásico de <strong>reposición con revisión periódica</strong>, y la respuesta conocida es elegir el nivel objetivo donde <strong>el costo de quedarse corto iguala al costo de pasarse</strong>. Falta poner número a los dos lados, y Bertok tiene los datos.</p>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:24%">Costo</th><th>Componentes</th><th style="width:24%">De dónde sale</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Quedarse corto</strong></td><td>Margen perdido, más daño de posicionamiento en ML por quedarse sin stock.</td><td>Margen por SKU de <span class="mono">bertok_bi_*</span> y la lista de precios.</td></tr>
+      <tr><td><strong>Pasarse</strong></td><td><strong>Dos componentes, y el segundo duele.</strong> ML cobra almacenamiento <em>por unidad y por día</em>, desde que entra hasta que se vende o se retira. Y si un SKU no rota, <strong>ML termina descartándolo</strong>: se pierde la mercadería entera.</td><td>Cargos reales de almacenamiento en <span class="mono">ML.db</span>.</td></tr>
+      <tr><td><strong>Costo oculto</strong></td><td><strong>No hay reserva de stock.</strong> Lo que va a Full deja de estar disponible para Flex y para el local.</td><td>Demanda por canal en <span class="mono">bertok_bi_*</span>.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="regla">Mandar de más a Full tiene triple castigo: pagás almacenaje, arriesgás que ML tire la mercadería, y desabastecés los otros dos canales.</p>
+  <p>Por eso el cálculo no puede ser «cubrir 15 días de demanda de Full»: tiene que ser <strong>un reparto entre canales</strong> que reconozca que el stock es uno solo.</p>
+
+  <h3>La sugerencia de ML: mostrarla, no obedecerla <span class="chip acento">Decidido</span></h3>
+  <p>ML calcula su propia sugerencia de cantidades en la misma ventana. La tarjeta muestra <strong>las dos, lado a lado, con la diferencia</strong>:</p>
+  <div class="maqueta">
+    <div class="t">FULL · CICLO 16/09 · DECIDIR</div>
+    <div class="d">SKU-0142 &nbsp; ML sugiere 120 &nbsp; · &nbsp; Bertok 84 &nbsp; · &nbsp; −30%</div>
+    <div class="d">SKU-0207 &nbsp; ML sugiere 40 &nbsp;&nbsp; · &nbsp; Bertok 44 &nbsp; · &nbsp; +10%</div>
+    <div class="d">3 SKU con desvío &gt; 25% — requieren decisión</div>
+  </div>
+  <p>Nunca seguir la sugerencia de ML a ciegas: <strong>ML optimiza para ML.</strong> Más stock en Full es más ingreso por almacenamiento y mejor disponibilidad en su plataforma, y su sugerencia no sabe nada de las ventas por Flex ni por el local ni del costo de mercadería. Mostrar las dos y pedir decisión humana cuando se separan más de un umbral es mejor que cualquiera de las dos sola — y con el tiempo, la comparación dice cuánto se le puede creer a ML por categoría.</p>
+</section>
+
+<!-- 23 -->
+<section id="s23">
+  <h2><span class="num">23</span>Plan de fases</h2>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:15%">Fase</th><th>Qué se hace</th><th style="width:24%">Termina cuando</th></tr></thead>
+    <tbody>
+      <tr><td><strong>0 · Terminar Picking</strong></td><td>PC dedicada. <strong>Mudanza de Picking primero, y se sigue depurando allá</strong> — ver abajo. Scripts de actualización a la misma máquina. Ollama a otra. <strong>Los cuatro niveles de cierre (punto 21).</strong> Roles cerrados y bloqueo de PIN. <strong>Pragmas de SQLite y verificación de la hipótesis de las caídas.</strong> <code>ops.db</code>, backup con <code>VACUUM INTO</code> y rotación. Sync de padrón desde Odoo y unificación del login. <code>CLAUDE.md</code> y <code>BITACORA.md</code> del módulo desde el día uno.</td><td><strong>Picking estable en la máquina nueva, sin caídas, durante dos semanas de uso normal</strong>, y el backup restauró bien una vez.</td></tr>
+      <tr><td><strong>1 · Motor + primera tarjeta</strong></td><td>Detectores, clave natural, máquina de estados, turnos, guarda de alcance, modo TV con reloj, modo usuario, push por n8n, auditoría — <strong>y «Pendientes de cierre» completa, en la misma etapa</strong>, con línea de corte y separación de las tres causas. <strong>Media hora de capacitación con el equipo, con el sistema andando, antes de encender el push.</strong></td><td>Una persona del depósito cerró un pendiente real que la tarjeta le mostró.</td></tr>
+      <tr><td><strong>2 · Salud de datos</strong></td><td>Frescura por fuente, tarjeta de salud, detección de detectores caídos y de scripts que no corrieron. Latido externo hacia n8n.</td><td>Detecta una sesión de Contabilium vencida antes de que la note una persona.</td></tr>
+      <tr><td><strong>3 · Despachos + Insumos</strong></td><td>La de mayor valor diario más la más barata. Ambas en sombra primero. Acá se calibra el ritmo por pedido.</td><td>Un día de despacho salió completo sin que Gerardo preguntara nada.</td></tr>
+      <tr><td><strong>4 · Mercado Ads</strong></td><td>Detector de punto de quiebre publicitario sobre datos ya existentes.</td><td>Se pausó un aviso perdedor que nadie había notado.</td></tr>
+      <tr><td><strong>5 · Comercio exterior</strong></td><td>Hitos de container desde <code>05 · Compras</code>. Fuera de la TV, acceso restringido.</td><td>El sistema avisó un vencimiento de pago antes que Antonella.</td></tr>
+      <tr><td><strong>6 · Full</strong></td><td>Los cuatro hitos, calendario de feriados, cálculo de cantidades contra la sugerencia de ML, cierre por detección en Picking.</td><td>Un ciclo completo se armó desde la lista que produjo el sistema.</td></tr>
+      <tr><td><strong>7 · Preguntas + Promociones + Reclamos</strong></td><td>Hermes v2 con el Centro como cara visible. Interfaz consultable del motor de precios. Ingesta de reclamos si hace falta.</td><td>Hermes sale de <code>dry_run</code> bajo el modelo de supervisión.</td></tr>
+      <tr><td><strong>8 · Calendario</strong></td><td>Rendición de cuentas, Google Ads, Posteo en redes. Las tres de compromiso, sin push.</td><td>Un mes cerró con los 4 posteos hechos.</td></tr>
+      <tr><td><strong>9 · Cobranzas</strong></td><td>Después de completar Finanzas.</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota">
+    <p class="titulo">Corrección de método sobre el plan original</p>
+    <p>El plan proponía Fase 1 arquitectura pura y Fase 2 implementación. <strong>Una arquitectura conceptual sin contacto con datos reales se ve preciosa y se rompe en el primer <code>JOIN</code>.</strong> Por eso el motor y la primera tarjeta van juntos: la arquitectura se valida con una tarjeta funcionando en el depósito, no con un documento aprobado.</p>
+  </div>
+
+  <div class="nota bloqueo">
+    <p class="titulo">Por qué la Fase 0 se llama «Terminar Picking»</p>
+    <p>Las dos primeras tarjetas leen <code>picking.db</code>. <strong>Construir un detector sobre una base que todavía cambia de forma es garantía de rehacerlo.</strong> Y el arreglo que más sirve —los niveles de cierre— es de Picking, no del Centro. Entonces el orden honesto es terminar Picking primero.</p>
+    <p><strong>Y mudar antes de terminar de depurar, no después.</strong> Suena contraintuitivo pero es lo correcto: se depura en la máquina donde el sistema va a vivir, se sale antes del Python compartido con ZKBioTime —que es sospechoso de las caídas— y se puede probar el <code>busy_timeout</code> en el mismo movimiento. Cada semana que Picking sigue compartiendo Python es una semana más de síntomas que no se van a poder atribuir a nada.</p>
+    <p><strong>Beneficio de regalo:</strong> si los niveles de cierre entran en Fase 0, para cuando el Centro construya su primera tarjeta ya van a llevar semanas generando datos limpios. El modo sombra arranca con historia en vez de con la hoja en blanco.</p>
+  </div>
+
+  <div class="nota pendiente">
+    <p class="titulo">Capacitación · un hueco que el plan no tenía</p>
+    <p>La evidencia sobre por qué fracasan estos sistemas en PyMEs es consistente en dos cosas. La primera: <strong>«el equipo no se resiste a la tecnología, se resiste a aceptar que el sistema muestra una realidad distinta de la asumida»</strong>. Ese choque va a ocurrir el día uno, con el número de remitos sin cerrar. <strong>Hay que presentarlo como problema de proceso, no de personas</strong> — si el equipo lo lee como «el sistema nos está marcando», se defiende; si lo lee como «esto se perdía y nadie se había dado cuenta», colabora.</p>
+    <p>La segunda: <strong>la falta de formación baja la adopción drásticamente</strong>. Por eso la capacitación es un entregable de Fase 1, no una buena intención.</p>
+  </div>
+</section>
+
+<!-- 24 -->
+<section id="s24">
+  <h2><span class="num">24</span>Cómo se agrega una tarjeta nueva</h2>
+  <ol>
+    <li><strong>Completar la ficha de racionalización</strong> (punto 11). Si la acción correctiva queda como «revisar», la tarjeta no existe.</li>
+    <li><strong>Nombrar la clave natural.</strong> Si no se puede nombrar una estable, la tarjeta no está bien pensada todavía.</li>
+    <li><strong>Elegir el tipo.</strong> Informativa por defecto; justificar por escrito cualquier tarjeta de acción.</li>
+    <li><strong>Nombrar dueño y suplente.</strong> Sin esto no se construye.</li>
+    <li><strong>Definir la línea de corte</strong> y qué se hace con la deuda vieja.</li>
+    <li><strong>Correr en sombra</strong> un mínimo de dos ciclos del proceso.</li>
+    <li><strong>Derivar los umbrales</strong> de lo que mostró la sombra, con el dueño presente.</li>
+    <li><strong>Encender sin push</strong>, después con push.</li>
+    <li><strong>Anotar en el <code>BITACORA.md</code></strong> qué se verificó y quién.</li>
+  </ol>
+  <p>Y una regla de contención: <strong>una tarjeta = un proceso.</strong> Cuando una tarjeta empieza a querer controlar dos cosas, son dos tarjetas.</p>
+</section>
+
+<!-- 25 -->
+<section id="s25">
+  <h2><span class="num">25</span>Decisiones</h2>
+  <h3>Cerradas</h3>
+  <p>Full existe como reposición · PC dedicada · Picking se muda · Ollama en otra máquina · bases fuera de OneDrive con <code>synchronous=FULL</code> · backup diario con <code>VACUUM INTO</code> y rotación · plan B sin máquina de repuesto · UPS en enero · TV con reloj · identidad desde Odoo, sync 6 h, baja inmediata local, gana la restricción · login por PIN con bloqueo · roles cerrados, sólo Gerardo configura · posponer sólo el responsable, aviso a la tercera · <strong>no existe el estado descartado</strong> · asignación, reasignación y nunca huérfano · asignación por dato en el canal ML · acuse de recibido · turnos rotativos en tres procesos · frecuencia por detector · <code>ML.db</code> como única fuente de ML · Hermes vuelca a <code>ML.db</code> y el Centro es la cara de Hermes v2 · el Centro sólo lee, sin excepciones · cierre de Full por detección · retención · línea de corte · TV muestra lo apto, PC lo propio · comercio exterior nunca en TV · rendición de cuentas sin contenido · «listo» = bultos cerrados · «hoy» = 13:00 · dos cortes de despacho · lunes a sábado, sin domingos ni feriados · cero pedidos a las 11:00 · tolerancias por fuente · el stock de Full sale del stock general · sugerencia de ML se muestra, no se obedece · hitos de container desde <code>05 · Compras</code> · 4 posteos por mes · Google Ads y Mercado Ads semanales · los 13 dueños y suplentes · <strong>método de los umbrales: externo, de política o derivado del percentil observado</strong> · <strong>arrancar sin tope de trabajo en curso y medirlo</strong> · correctivo documentado · nombre «Dejá de acordarte de todo».</p>
+  <p><strong>Incorporado en la revisión con fuentes externas:</strong> jerarquía de prevención antes de construir cualquier tarjeta · los cuatro niveles de cierre van en Picking, no en el Centro · Fase 0 pasa a ser «Terminar Picking», mudando antes de terminar de depurar · estado autoritativo con log de auditoría, sin reconstrucción · campo <code>version</code> en cada evento · reclamos de ML por webhook, no por polling · pragmas de concurrencia de SQLite en las dos bases · reinicio, refresco y watchdog de la TV · capacitación como entregable de Fase 1 · el 40-50% pasa a ser hipótesis a medir, no dato · el hallazgo lleva expreso y cliente como atributos.</p>
+
+  <h3>Abiertas</h3>
+  <div class="tabla-marco">
+  <table class="compacta">
+    <thead><tr><th style="width:5%">#</th><th style="width:38%">Decisión</th><th>Qué bloquea</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">01</td><td><strong>La carga de Antonella y la de Gerardo.</strong> Seis procesos y cinco suplencias respectivamente. No lo resuelve la arquitectura.</td><td>La sostenibilidad de todo el sistema.</td></tr>
+      <tr><td class="mono">02</td><td><strong>Que el motor de precios publique el precio mínimo por SKU.</strong> Ver abajo.</td><td>Fase 7 · trabajo del módulo 03.</td></tr>
+      <tr><td class="mono">03</td><td><strong>Los números de los umbrales derivados.</strong> El método ya está definido (punto 20): percentil de la distribución observada. Faltan los valores. <strong>No se decide: se mide.</strong></td><td>Después de la sombra de cada tarjeta.</td></tr>
+      <tr><td class="mono">04</td><td><strong>Latido externo hacia n8n</strong> — el watchdog que la TV negra no cubre.</td><td>Fase 2.</td></tr>
+      <tr><td class="mono">05</td><td><strong>UPS</strong>, postergada a enero.</td><td>Disponibilidad, no datos.</td></tr>
+      <tr><td class="mono">06</td><td><strong>Consulta legal sobre el registro de correctivos</strong> antes de implementar ese campo.</td><td>Ese campo, no el resto.</td></tr>
+      <tr><td class="mono">07</td><td><strong>Consulta al contador: ¿el remito digital de ARCA alcanza a Bertok, y desde cuándo?</strong> El régimen tiene cronograma escalonado entre julio de 2026 y marzo de 2027. Si alcanza, la tarjeta de Pendientes de cierre cambia de forma antes de estar terminada.</td><td><strong>Fase 1.</strong> Es una pregunta, cuesta nada, y puede evitar rehacer la primera tarjeta.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="nota">
+    <p class="titulo">Decisión 02 · el precio mínimo por SKU</p>
+    <p>Para Promociones ML hay que responder: <em>si entro con este descuento, ¿el precio que queda respeta <code>precio_ML ≥ precio_lista_local × 1.15</code> y el piso de markup neto del 45%?</em> Hoy nada puede responderlo: el motor de precios es un proceso por lote que produce <strong>el precio</strong>, y r056 dice cuál es el precio hoy, no <strong>hasta dónde se puede bajar</strong>. Y el Centro no puede calcularlo por su cuenta sin reimplementar la cascada de costos, que es justo lo que prohíbe el principio de no duplicación.</p>
+    <p><strong>Recomendación:</strong> que el motor de precios, cuando corre, escriba además <strong>el precio mínimo aceptable de cada SKU</strong> — el punto donde toca el 1.15 o el 45%, lo que sea más restrictivo. El Centro lee ese número y compara. Es una columna más, no un módulo; el Centro sigue siendo de sólo lectura; no hay dependencia en tiempo real; y el cálculo sigue viviendo en un solo lugar. Además habilita después una tarjeta de «precio por debajo del piso de política» que hoy no existe.</p>
+  </div>
+  <p><strong>Diferidas por dependencia, no por indefinición:</strong> las <strong>reglas de cobranza</strong> —qué requiere acción, cuándo aparece, qué pasa después de una llamada, cuándo reaparece— se definen en Fase 9, cuando el submódulo de Finanzas baje los reportes de Tesorería y Cuentas Corrientes. Antes de eso no hay datos sobre los que decidir.</p>
+
+  <h3>A verificar (datos, no decisiones)</h3>
+  <ul>
+    <li>¿<code>ML.db</code> ya ingiere <strong>reclamos</strong>, o hay que sumarlo al <code>.bat</code>?</li>
+    <li>¿<code>ML.db</code> ya trae <strong>stock en Full, envíos de reposición y la sugerencia de cantidades de ML</strong>?</li>
+    <li>¿Los <strong>cargos de almacenamiento de Full</strong> están identificados como tales dentro de las 7.051 filas de cargos reales?</li>
+    <li>¿El <strong>sábado rige el mismo horario de corte</strong> que de lunes a viernes?</li>
+    <li><strong>Hoy, en depuración, ¿qué pasa con los pedidos que no se pueden cerrar?</strong> ¿Quedan abiertos acumulándose, hay un cierre forzado, o se está cerrando con lo que haya? Es la pregunta más importante de las que quedan: determina si el punto de partida es un problema a medir o un dato ya contaminado.</li>
+    <li>¿<strong>El expreso da número de guía con seguimiento y constancia de entrega?</strong> De eso depende que el nivel B de cierre sea viable, y sería el que resuelve la mayor parte.</li>
+    <li>¿<strong>Cuántos expresos se usan?</strong> Si son dos o tres, el scorecard es simple y muy accionable.</li>
+    <li>El <code>CLAUDE.md</code> de Cortex dice que Bertok vende «tintas, sustratos e insumos gráficos». Eso alimenta los prompts del agente que responde a leads B2B reales. <strong>Es independiente de este proyecto y es más urgente que él.</strong></li>
+  </ul>
+</section>
+
+<!-- 26 -->
+<section id="s26">
+  <h2><span class="num">26</span>Fuentes</h2>
+  <ul class="fuentes">
+    <li><strong>Gestión de alarmas — ISA-18.2.</strong> Principio de alarma accionable y proceso de racionalización.<br>
+      <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-18-series-of-standards">ISA-18 Series of Standards</a> · <a href="https://www.isa.org/getmedia/55b4210e-6cb2-4de4-89f8-2b5b6b46d954/PAS-Understanding-ISA-18-2.pdf">Understanding and Applying ANSI/ISA-18.2</a> · <a href="https://www.emerson.com/documents/automation/white-paper-alarm-rationalization-deltav-en-56654.pdf">Alarm Rationalization (Emerson)</a></li>
+    <li><strong>Andon y gestión visual.</strong> Definir quién responde antes de colgar la pantalla.<br>
+      <a href="https://www.l2l.com/blog/andon-in-lean-manufacturing">Andon System in Lean Manufacturing</a> · <a href="https://businessmap.io/continuous-flow/andon">What is Andon in Lean Manufacturing</a> · <a href="https://tervene.com/blog/visual-management/">Visual Management in Manufacturing</a></li>
+    <li><strong>Alertas y guardias — Google SRE.</strong> Separación aviso / ticket / registro y carga sostenible.<br>
+      <a href="https://sre.google/sre-book/being-on-call/">Being On-Call</a> · <a href="https://sre.google/workbook/on-call/">On-Call (Workbook)</a> · <a href="https://incident.io/blog/sre-alerting-best-practices">SRE alerting best practices</a></li>
+    <li><strong>Reposición con revisión periódica.</strong> Marco (R,S) y nivel óptimo entre faltante y sobrante.<br>
+      <a href="https://pubsonline.informs.org/doi/10.1287/msom.5.1.37.12761">Properties of the Periodic Review (R,T) Policy</a> · <a href="https://www.lancaster.ac.uk/stor-i-student-sites/fiona-wilson/wp-content/uploads/sites/73/2026/01/RT1-Presentation.pdf">Newsvendor and Periodic Review Models</a></li>
+    <li><strong>Costos de almacenamiento en Mercado Libre Full.</strong> Cobro diario por unidad; stock sin rotación como gasto fijo; retiro o descarte del stock muerto.<br>
+      <a href="https://base.com/es-AR/blog/costo-almacenamiento-mercado-libre/">Cómo reducir costos de almacenamiento en ML</a> · <a href="https://blog.real-trends.com/2022/03/04/cuales-son-los-costos-por-almacenar-stock-en-mercado-envios-full/">Costos del almacenamiento prolongado en Full</a></li>
+    <li><strong>Límites de trabajo en curso — Kanban.</strong><br>
+      <a href="https://www.atlassian.com/agile/kanban/wip-limits">Working with WIP limits</a> · <a href="https://businessmap.io/kanban-resources/getting-started/what-is-wip">Guide to WIP Limits</a></li>
+    <li><strong>Seguridad de autenticación — OWASP.</strong> Bloqueo tras 3–5 intentos y límite de tasa en login.<br>
+      <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html">Authentication Cheat Sheet</a> · <a href="https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/04-Authentication_Testing/03-Testing_for_Weak_Lock_Out_Mechanism">Testing for Weak Lock Out Mechanism</a></li>
+    <li><strong>Protección de datos personales — Argentina.</strong> Ley 25.326, aplicable a archivos con datos de empleados.<br>
+      <a href="https://www.argentina.gob.ar/normativa/nacional/ley-25326-64790/actualizacion">Ley 25.326 — texto actualizado</a></li>
+    <li><strong>Poka-yoke y jerarquía de prevención — Shingo.</strong> La inspección no previene defectos; jerarquía eliminación → reemplazo → facilitación → detección → mitigación.<br>
+      <a href="https://www.lean.org/lexicon-terms/poka-yoke/">Poka-Yoke (Lean Enterprise Institute)</a> · <a href="https://asq.org/quality-resources/mistake-proofing">Mistake-Proofing (ASQ)</a> · <a href="https://flowfuse.com/blog/2025/09/poka-yoke-mistake-proofing/">Poka-Yoke: tipos y ejemplos</a></li>
+    <li><strong>Remito en Argentina.</strong> Valor probatorio ligado a la firma y la trazabilidad; conservación mínima; régimen de remito digital de ARCA con cronograma 2026-2027.<br>
+      <a href="https://www.saij.gob.ar/instrumentos-privados-remito-valor-probatorio-sul0003111/123456789-0abc-defg1113-000lsoiramus">Remito y valor probatorio (SAIJ)</a> · <a href="https://lexorbium.com/orden-de-compra-remito-y-factura-en-argentina-como-sirven-para-probar-una-deuda-comercial-4695/">Remito como prueba de deuda comercial</a> · <a href="https://www.iprofesional.com/impuestos/426852-arca-remito-digital-plazos-obligaciones-y-todas-las-claves-del-nuevo-documento">ARCA remito digital</a> · <a href="https://siap.blogdelcontador.com.ar/novedades/arca-reglamenta-nuevas-pautas-y-adecua-la-entrada-en-vigencia-de-los-nuevos-obligados-a-emitir-comprobantes-electronicos/">RG 5866/2026 y cronograma</a> · <a href="https://www.iprofesional.com/impuestos/287274-afip-impuesto-inflacion-Por-cuanto-tiempo-tengo-que-conservar-los-comprobantes-en-materia-fiscal">Conservación de comprobantes</a></li>
+    <li><strong>SQLite en producción.</strong> WAL, <code>busy_timeout</code>, <code>BEGIN IMMEDIATE</code>, checkpoints y el modelo de escritor único.<br>
+      <a href="https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers">SQLite en producción: WAL y concurrencia</a> · <a href="https://builder.ai2sql.io/blog/sqlite-error-database-is-locked">«Database is locked»: guía</a> · <a href="https://coddy.tech/docs/sqlite/wal-mode-and-concurrency">WAL y concurrencia</a></li>
+    <li><strong>Event sourcing: costos reales.</strong> Versionado de eventos, reconstrucción de proyecciones y evolución de esquemas.<br>
+      <a href="https://www.sciencedirect.com/science/article/pii/S0164121221000674">Schema evolution en sistemas event-sourced (ScienceDirect)</a> · <a href="https://thebackenddevelopers.substack.com/p/event-sourcing-in-backend-systems-3e7">Trade-offs operativos</a></li>
+    <li><strong>Pantallas 24/7 y modo kiosco.</strong> Reinicio programado, refresco, watchdog y prevención de burn-in.<br>
+      <a href="https://smartupworld.com/chromium-kiosk-mode/">Chromium kiosk mode</a> · <a href="https://seenlabs.com/blog/beyond-the-blue-screen-how-to-prevent-and-recover-from-digital-signage-crashes">Prevenir y recuperarse de caídas</a> · <a href="https://us.ktcplay.com/blogs/support-tips/burn-in-prevention-24-7-monitoring-displays">Burn-in en pantallas de monitoreo</a></li>
+    <li><strong>API de Mercado Libre.</strong> Límites de tasa compartidos y recomendación de webhooks sobre polling.<br>
+      <a href="https://global-selling.mercadolibre.com/devsite/manage-questions-answers-global-selling/question-3">Rate limits y cuotas compartidas</a> · <a href="https://developers.mercadolibre.com.bo/en_us/working-with-claims">Claims</a></li>
+    <li><strong>Adopción y fracaso de sistemas de gestión en PyMEs.</strong> La resistencia no es a la tecnología sino al choque entre intuición y datos; el peso de la formación.<br>
+      <a href="https://www.tacticasoft.com/en/sistema-no-se-usa-digitalizacion-pyme/">Por qué la digitalización fracasa en PyMEs</a> · <a href="https://www.ixpantia.com/es/blog/por-que-tus-colaboradores-no-utilizan-los-dashboards">Por qué no se usan los dashboards</a></li>
+  </ul>
+</section>
+
+<p class="pie">Documento de arquitectura. Las decisiones de negocio que faltan están en el punto 25 y son de Gerardo. Nada de lo descrito acá está implementado — todo el catálogo está en <span class="chip rojo">rojo</span> hasta que una persona lo use en la operación real.</p>
+
+</main>
+</div>
+</div>
