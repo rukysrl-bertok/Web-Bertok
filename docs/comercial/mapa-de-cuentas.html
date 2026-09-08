@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mapa de cuentas objetivo de mineria, petroleo y gas y energia electrica en Argentina para Bertok.">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa de Cuentas Bertok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=Chivo+Mono:wght@400;600&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --ground:#E8E9E5;
+    --surface:#F6F6F3;
+    --surface-2:#FDFDFC;
+    --ink:#1A1D19;
+    --ink-2:#4A4F49;
+    --ink-3:#787E77;
+    --line:#CBCEC7;
+    --line-soft:#DDDFD9;
+    --min:#A24A22;
+    --oil:#16565A;
+    --ene:#75641A;
+    --ind:#4C5560;
+    --can:#6A4A6E;
+    --accent:#A24A22;
+    --chip:rgba(26,29,25,.06);
+    --shadow:0 1px 0 rgba(26,29,25,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#141613;
+      --surface:#1C1F1B;
+      --surface-2:#232722;
+      --ink:#E9EAE4;
+      --ink-2:#B0B5AD;
+      --ink-3:#848A81;
+      --line:#333831;
+      --line-soft:#2A2E28;
+      --min:#DE8055;
+      --oil:#5FB6BA;
+      --ene:#C7AC55;
+      --ind:#98A4B0;
+      --can:#B393B8;
+      --accent:#DE8055;
+      --chip:rgba(233,234,228,.07);
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141613;
+    --surface:#1C1F1B;
+    --surface-2:#232722;
+    --ink:#E9EAE4;
+    --ink-2:#B0B5AD;
+    --ink-3:#848A81;
+    --line:#333831;
+    --line-soft:#2A2E28;
+    --min:#DE8055;
+    --oil:#5FB6BA;
+    --ene:#C7AC55;
+    --ind:#98A4B0;
+    --can:#B393B8;
+    --accent:#DE8055;
+    --chip:rgba(233,234,228,.07);
+    --shadow:none;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Alegreya Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+
+  /* ---- Header ---- */
+  header.masthead{
+    border-bottom:2px solid var(--ink);
+    padding:32px 0 18px;
+    margin-bottom:0;
+  }
+  .eyebrow{
+    font-family:"Chivo Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-3);margin:0 0 10px;
+  }
+  h1{
+    font-family:Chivo,"Helvetica Neue",Arial,sans-serif;
+    font-weight:900;letter-spacing:-.025em;line-height:1.02;
+    font-size:clamp(30px,5.4vw,52px);
+    margin:0 0 12px;text-wrap:balance;
+  }
+  .standfirst{
+    font-size:17px;color:var(--ink-2);max-width:62ch;margin:0 0 4px;
+  }
+  .standfirst strong{color:var(--ink);font-weight:700}
+
+  /* ---- Resumen ---- */
+  .tally{
+    display:flex;flex-wrap:wrap;gap:0;
+    border-bottom:1px solid var(--line);
+    margin-bottom:26px;
+  }
+  .tally div{
+    padding:14px 26px 14px 0;margin-right:26px;
+    border-right:1px solid var(--line-soft);
+  }
+  .tally div:last-child{border-right:0}
+  .tally b{
+    display:block;
+    font-family:"Chivo Mono",monospace;font-weight:600;
+    font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums;
+    color:var(--ink);
+  }
+  .tally span{
+    font-family:"Chivo Mono",monospace;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  }
+
+  /* ---- Controles ---- */
+  .controls{
+    position:sticky;top:0;z-index:20;
+    background:var(--ground);
+    padding:12px 0 12px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .ctl-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  input[type="search"]{
+    flex:1 1 240px;min-width:200px;
+    font-family:inherit;font-size:15px;color:var(--ink);
+    background:var(--surface-2);
+    border:1px solid var(--line);border-radius:2px;
+    padding:9px 12px;
+  }
+  input[type="search"]::placeholder{color:var(--ink-3)}
+  select{
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);
+    border-radius:2px;padding:9px 10px;
+  }
+  input:focus-visible,select:focus-visible,button:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px;
+  }
+  .filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .fbtn{
+    font-family:"Chivo Mono",monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;
+    background:transparent;color:var(--ink-2);
+    border:1px solid var(--line);border-radius:2px;
+    padding:6px 10px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+    transition:background .12s ease,color .12s ease,border-color .12s ease;
+  }
+  .fbtn:hover{background:var(--chip)}
+  .fbtn .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+  .fbtn[aria-pressed="true"]{
+    background:var(--ink);color:var(--ground);border-color:var(--ink);
+  }
+  .fbtn[data-k="min"]{color:var(--min)}
+  .fbtn[data-k="oil"]{color:var(--oil)}
+  .fbtn[data-k="ene"]{color:var(--ene)}
+  .fbtn[data-k="ind"]{color:var(--ind)}
+  .fbtn[data-k="can"]{color:var(--can)}
+  .fbtn[data-k="min"][aria-pressed="true"],
+  .fbtn[data-k="oil"][aria-pressed="true"],
+  .fbtn[data-k="ene"][aria-pressed="true"],
+  .fbtn[data-k="ind"][aria-pressed="true"],
+  .fbtn[data-k="can"][aria-pressed="true"]{color:var(--ground)}
+  .count-live{
+    font-family:"Chivo Mono",monospace;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-3);margin-left:auto;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---- Grupos ---- */
+  .group{margin-top:34px}
+  .group-head{
+    display:flex;align-items:baseline;gap:12px;
+    padding-bottom:8px;margin-bottom:2px;
+    border-bottom:2px solid var(--sc,var(--ink));
+  }
+  .group-head h2{
+    font-family:Chivo,sans-serif;font-weight:900;
+    font-size:19px;letter-spacing:-.01em;margin:0;
+    color:var(--sc,var(--ink));
+  }
+  .group-head .n{
+    font-family:"Chivo Mono",monospace;font-size:11.5px;color:var(--ink-3);
+    font-variant-numeric:tabular-nums;margin-left:auto;
+  }
+  .group-note{
+    font-size:14.5px;color:var(--ink-2);margin:8px 0 4px;max-width:70ch;
+  }
+
+  /* ---- Filas ---- */
+  .row{
+    display:grid;
+    grid-template-columns:14px minmax(0,1fr);
+    gap:0 14px;
+    padding:14px 0 14px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .row:hover{background:var(--surface)}
+  .prio{
+    align-self:start;margin-top:6px;
+    width:10px;height:10px;border-radius:50%;
+    border:1.5px solid var(--sc,var(--ink));
+  }
+  .prio.p1{background:var(--sc,var(--ink))}
+  .prio.p2{background:linear-gradient(90deg,var(--sc,var(--ink)) 50%,transparent 50%)}
+  .prio.p3{background:transparent}
+  .r-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 10px}
+  .r-name{
+    font-family:Chivo,sans-serif;font-weight:700;font-size:17px;
+    letter-spacing:-.005em;margin:0;color:var(--ink);
+  }
+  .r-op{font-size:14.5px;color:var(--ink-2)}
+  .prov{
+    font-family:"Chivo Mono",monospace;font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-3);
+    border:1px solid var(--line);border-radius:2px;padding:2px 5px;
+    white-space:nowrap;
+  }
+  .r-foco{
+    margin:6px 0 0;font-size:15px;color:var(--ink-2);max-width:78ch;
+  }
+  .r-foco b{color:var(--ink);font-weight:700}
+  .r-nota{
+    margin:5px 0 0;font-size:13.5px;color:var(--ink-3);font-style:italic;max-width:74ch;
+  }
+
+  /* ---- Bloques de texto ---- */
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--line-soft);
+    border-left:3px solid var(--sc,var(--accent));
+    padding:20px 22px;margin-top:38px;
+  }
+  .panel h3{
+    font-family:Chivo,sans-serif;font-weight:900;font-size:16px;
+    margin:0 0 10px;letter-spacing:-.01em;
+  }
+  .panel h4{
+    font-family:"Chivo Mono",monospace;font-weight:600;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    margin:20px 0 6px;
+  }
+  .panel p{margin:0 0 10px;max-width:70ch;color:var(--ink-2);font-size:15px}
+  .panel ol,.panel ul{margin:0 0 10px;padding-left:20px;color:var(--ink-2);font-size:15px;max-width:70ch}
+  .panel li{margin-bottom:6px}
+  .panel b,.panel strong{color:var(--ink)}
+  .empty{
+    padding:40px 0;text-align:center;color:var(--ink-3);
+    font-family:"Chivo Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  footer.foot{
+    margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-3);max-width:76ch;
+  }
+  footer.foot a{color:var(--ink-2)}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;
+    font-family:"Chivo Mono",monospace;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink-3);display:inline-block}
+  .legend i.p1{background:var(--ink-3)}
+  .legend i.p2{background:linear-gradient(90deg,var(--ink-3) 50%,transparent 50%)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  @media (max-width:620px){
+    .tally div{padding-right:18px;margin-right:18px}
+    .count-live{margin-left:0;width:100%}
+  }
+</style>
+<style>
+  .share-note{
+    background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    padding:12px 16px;margin:18px 0 0;font-size:14px;color:var(--ink-2);
+  }
+  .share-note b{color:var(--ink)}
+  @media print{
+    @page{ size:A4; margin:14mm 12mm; }
+    :root{
+      --ground:#fff;--surface:#fff;--surface-2:#fff;
+      --ink:#111;--ink-2:#333;--ink-3:#666;
+      --line:#bbb;--line-soft:#ddd;
+      --min:#8C3F1D;--oil:#124A4E;--ene:#645615;--ind:#3F4750;--can:#5A3F5E;--accent:#8C3F1D;
+    }
+    body{background:#fff;color:#111;font-size:10.5pt}
+    .wrap{max-width:none;padding:0}
+    .controls,.share-note{display:none!important}
+    .masthead{padding-top:0}
+    h1{font-size:26pt}
+    .standfirst{font-size:11pt}
+    .tally div{padding:8px 16px 8px 0;margin-right:16px}
+    .tally b{font-size:16pt}
+    .group{margin-top:20px}
+    .group-head{break-after:avoid}
+    .row{break-inside:avoid;page-break-inside:avoid;padding:8px 0}
+    .row:hover{background:transparent}
+    .panel{break-inside:avoid;page-break-inside:avoid;margin-top:20px}
+    .r-name{font-size:11.5pt}
+    .r-op,.r-foco{font-size:10pt}
+    .r-nota{font-size:9pt}
+    a{color:#111;text-decoration:none}
+  }
+</style>
+
+<style>
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Bertok · Desarrollo comercial · Septiembre 2026</p>
+    <h1>Mapa de Cuentas Bertok</h1>
+    <p class="standfirst">Compradores de <strong>insumos, productos y desarrollos especiales</strong> en minería, petróleo &amp; gas y energía eléctrica de la Argentina. Ordenado por dónde hay presupuesto abierto hoy, no por tamaño de la empresa.</p>
+  </header>
+  <p class="share-note"><b>Documento interno de Bertok.</b> Uso comercial exclusivo del equipo. Datos de operadores y proyectos verificados a septiembre de 2026; el mapa petrolero convencional y las concesiones hidroeléctricas cambiaron de manos entre 2025 y 2026, así que conviene confirmar el interlocutor antes de cada contacto. Para imprimir o guardar como PDF: <b>Ctrl+P</b> (Cmd+P en Mac) — los filtros no se imprimen y sale el listado completo.</p>
+
+
+  <div class="tally" id="tally"></div>
+
+  <div class="controls">
+    <div class="ctl-row">
+      <input type="search" id="q" placeholder="Buscar empresa, yacimiento, mina o provincia…" aria-label="Buscar">
+      <select id="prov" aria-label="Filtrar por provincia"><option value="">Todas las provincias</option></select>
+      <select id="pr" aria-label="Filtrar por prioridad">
+        <option value="">Toda prioridad</option>
+        <option value="1">Prioridad alta</option>
+        <option value="2">Prioridad media</option>
+        <option value="3">Prioridad baja</option>
+      </select>
+    </div>
+    <div class="filters" id="secf"></div>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="panel">
+    <h3>Cómo se entra realmente a estas cuentas</h3>
+    <p>El 90% de los intentos muere antes de la primera cotización por no tener el alta formal. El orden que funciona:</p>
+    <ol>
+      <li><b>Alta de proveedor.</b> Las majors (Newmont, BHP/Vicuña, Rio Tinto, Glencore, Barrick, Shell, TotalEnergies) compran por portal corporativo tipo SAP Ariba o Coupa. Sin alta, sin RFQ. Las nacionales (YPF, PAE, Pampa, Tecpetrol) tienen registro de proveedores propio.</li>
+      <li><b>Paquete documental listo.</b> Constancia de AFIP e IIBB, ART con cláusula de no repetición, seguro de responsabilidad civil, política de HSE y de sostenibilidad, antecedentes, capacidad financiera. Armalo una vez y reutilizalo.</li>
+      <li><b>Contenido local.</b> Santa Cruz, Neuquén, San Juan, Salta, Catamarca y Jujuy tienen regímenes de compre local con puntaje. Domicilio fiscal o depósito en la provincia es un diferencial concreto, no un detalle.</li>
+      <li><b>Homologación técnica.</b> Para aceros de perforación, sostenimiento, bombas o elementos de desgaste hay que pasar por Ingeniería/Mantenimiento, no solo por Compras. Ahí es donde entran los <b>desarrollos especiales</b>: pieza a plano, adaptación de un repuesto importado, reducción de lead time.</li>
+      <li><b>Prueba piloto acotada.</b> Un ítem, un área, medición de duración o costo por hora. Es la vía más rápida de reemplazar a un proveedor instalado.</li>
+    </ol>
+
+    <h4>Dónde tiene ventaja un proveedor nacional</h4>
+    <ul>
+      <li><b>Lead time.</b> Todo repuesto importado tiene 12 a 30 semanas. Fabricar local a 3-6 semanas gana solo por disponibilidad.</li>
+      <li><b>Ingeniería inversa de repuestos.</b> Elementos de desgaste, camisas, impulsores, bujes, pines, forros: alto consumo, alta rotación, marca original cara.</li>
+      <li><b>Stock consignado en mina o base.</b> Cerro Negro, Veladero, Cerro Vanguardia y Cerro Dragón valoran más el stock en sitio que el precio unitario.</li>
+      <li><b>Kits y armados a medida.</b> Mangueras prensadas, tableros, conjuntos hidráulicos, bandejas antiderrame: producto, no servicio.</li>
+    </ul>
+
+    <h4>Los tres eventos donde está toda la cadena</h4>
+    <ul>
+      <li><b>AOG Patagonia</b> (Comodoro Rivadavia) y <b>AOG Buenos Aires</b> — petróleo y gas.</li>
+      <li><b>Argentina Mining</b> y <b>Arminera</b> — minería, con rueda de negocios y compradores presentes.</li>
+      <li><b>Expo Vaca Muerta / Neuquén</b> — el circuito de compras de la cuenca neuquina.</li>
+    </ul>
+  </div>
+
+  <div class="panel" style="--sc:var(--oil)">
+    <h3>Secuencia sugerida de ataque comercial</h3>
+    <ol>
+      <li><b>Mes 1-2 · Santa Cruz.</b> Newmont, AngloGold, Pan American, Hochschild y los nuevos operadores del Golfo San Jorge están todos en un radio de 400 km y comparten cadena logística. Una sola base sirve para minería y petróleo.</li>
+      <li><b>Mes 2-4 · San Juan y Neuquén.</b> Obra de Vicuña, Los Azules y El Pachón por un lado; Vaca Muerta y las obras de Oldelval/VMOS por el otro. Son los dos frentes con más presupuesto de capital abierto del país.</li>
+      <li><b>Mes 4-6 · Puna (Salta, Jujuy, Catamarca).</b> Siete operaciones de litio en producción más ampliaciones. Consumo estable, logística difícil, poca competencia local instalada.</li>
+      <li><b>Transversal · canal indirecto.</b> Los contratistas mineros y de perforación compran por su cuenta y deciden más rápido que la operadora. Es la vía de entrada más corta.</li>
+    </ol>
+  </div>
+
+  <footer class="foot">
+    <p><b>Cómo leer la prioridad:</b> no es tamaño de empresa, es probabilidad de comprarle a un proveedor nuevo en los próximos 12 meses — combinación de consumo recurrente, obra activa y accesibilidad del área de compras.</p>
+    <div class="legend">
+      <span><i class="p1"></i> Alta</span>
+      <span><i class="p2"></i> Media</span>
+      <span><i></i> Baja / seguimiento</span>
+    </div>
+    <p style="margin-top:14px">Datos de operadores y proyectos verificados a septiembre de 2026. El mapa petrolero convencional y las concesiones hidroeléctricas del Comahue cambiaron de manos entre 2025 y 2026: confirmar el operador vigente antes de cada visita. Las filas marcadas <i>verificar</i> tienen titularidad o estado operativo en transición.</p>
+  </footer>
+</div>
+
+<script>
+const SEC = {
+  min:{label:"Minería", short:"Minería", color:"var(--min)", note:"Catorce minas de oro en producción, tres grandes operaciones de plata, siete salares de litio operando y la mayor ola de obra de cobre de la historia del país. Es el sector con más consumo de insumos por dólar facturado."},
+  oil:{label:"Petróleo y gas", short:"Petróleo y gas", color:"var(--oil)", note:"Vaca Muerta concentra la inversión, pero el negocio para un proveedor nuevo está en los operadores medianos que tomaron los campos convencionales que dejaron YPF y las majors en Chubut y Santa Cruz: arman estructura desde cero."},
+  ene:{label:"Energía eléctrica", short:"Energía", color:"var(--ene)", note:"Generación, transmisión y distribución. Compras más formales y por licitación, ciclos más lentos, pero contratos plurianuales y baja rotación de proveedor una vez adentro."},
+  ind:{label:"Industria pesada, cemento y canteras", short:"Industria", color:"var(--ind)", note:"Consumen exactamente los mismos rubros que la minería — molienda, desgaste, filtros, sostenimiento de cantera — con compras más accesibles y logística más barata. Es el mejor banco de pruebas antes de ir a una major."},
+  can:{label:"Canal indirecto: contratistas y servicios", short:"Canal indirecto", color:"var(--can)", note:"No son el usuario final pero compran con presupuesto propio, deciden en semanas y no exigen el alta corporativa. La vía de entrada más rápida, y después sirven de referencia ante la operadora."}
+};
+
+const D = [
+/* ---------- MINERÍA: oro y plata ---------- */
+{n:"Newmont", g:"Cerro Negro — subterránea Au/Ag, Perito Moreno", p:["Santa Cruz"], s:"min", pr:1, f:"<b>Sostenimiento</b> (split set, malla, resina, fibra para shotcrete), aceros de perforación, EPP y autorrescatadores, reactivos de planta y Merrill-Crowe, mangas de ventilación."},
+{n:"AngloGold Ashanti", g:"Cerro Vanguardia — cielo abierto y subterránea, con Fomicruz", p:["Santa Cruz"], s:"min", pr:1, f:"Bolas de molienda, elementos de desgaste, GET, filtros y lubricantes, cianuro y cal, EPP, ferretería industrial."},
+{n:"Pan American Silver", g:"Cerro Moro — Au/Ag; activos en cierre progresivo", p:["Santa Cruz"], s:"min", pr:1, f:"Sostenimiento subterráneo, aceros de perforación, reactivos, insumos de laboratorio, repuestos de equipo bajo perfil."},
+{n:"Hochschild Mining / Minera Santa Cruz", g:"San José — JV con McEwen Mining", p:["Santa Cruz"], s:"min", pr:1, f:"Pernos y malla, cartuchos de resina, brocas y barras, bombas de achique y repuestos, cables mineros, iluminación LED."},
+{n:"Barrick Mining", g:"Veladero — JV 50/50 con Shandong Gold, lixiviación en pilas a 4.000 m", p:["San Juan"], s:"min", pr:1, f:"Geomembranas y geotextiles, cañería HDPE, cal y cianuro, neumáticos y GET, EPP de altura y frío extremo, anticongelantes."},
+{n:"Cerrado Gold", g:"Don Nicolás y Las Calandrias", p:["Santa Cruz"], s:"min", pr:2, f:"Consumibles de planta, molienda, ferretería, lubricantes, EPP. Operación chica: decide rápido y prueba proveedores nuevos."},
+{n:"Patagonia Gold", g:"Cap-Oeste y Mina Martha; Calcatreu en construcción", p:["Santa Cruz","Río Negro"], s:"min", pr:2, f:"Calcatreu está en obra: sostenimiento, cañería, eléctrico, señalización, EPP, contenedores y equipamiento de campamento.", nota:"Ventana de compra de arranque de proyecto — el mejor momento para entrar."},
+{n:"Gualcamayo (Eris LLC)", g:"Gualcamayo — Au, con proyecto de carbonatos profundos", p:["San Juan"], s:"min", pr:2, f:"Reactivos de lixiviación, cañería y riego de pilas, repuestos de equipo móvil, EPP.", nota:"Titularidad cambió en los últimos años — verificar interlocutor de compras."},
+{n:"Fortuna Mining", g:"Lindero — Au, lixiviación en pilas en la Puna a 3.500 m", p:["Salta"], s:"min", pr:2, f:"Cal, cianuro, geomembranas, cañería HDPE, carbón activado, EPP de altura, lubricantes de clima frío."},
+{n:"SSR Mining", g:"Puna Operations — Chinchillas y Pirquitas, Ag/Pb/Zn", p:["Jujuy"], s:"min", pr:2, f:"Reactivos de flotación, bolas y revestimientos de molino, elementos de desgaste, neumáticos, EPP."},
+{n:"YMAD / Minera Alumbrera", g:"Farallón Negro en producción; Bajo la Alumbrera en cierre de mina", p:["Catamarca"], s:"min", pr:2, f:"Consumibles de operación más, en Alumbrera, todo el rubro de cierre: geosintéticos, revegetación, contención, bombeo, monitoreo."},
+{n:"Glencore — Mina Aguilar", g:"Zn/Pb, subterránea de altura", p:["Jujuy"], s:"min", pr:3, f:"Sostenimiento, reactivos de flotación, molienda.", nota:"Verificar estado operativo antes de invertir esfuerzo comercial."},
+{n:"Austral Gold", g:"Casposo — operación intermitente", p:["San Juan"], s:"min", pr:3, f:"Consumibles de planta y mina si reactiva."},
+{n:"YCRT — Yacimientos Carboníferos Río Turbio", g:"Carbón subterráneo + central térmica de 240 MW", p:["Santa Cruz"], s:"min", pr:2, f:"Sostenimiento, cintas transportadoras y empalmes, ventilación, detección de gases, EPP, insumos de central térmica.", nota:"Estatal: se vende por licitación pública. Ciclo lento pero volumen alto."},
+
+/* ---------- MINERÍA: litio ---------- */
+{n:"Rio Tinto Lithium", g:"Fénix (Hombre Muerto), Olaroz, Rincón en ramp-up, Sal de Vida", p:["Catamarca","Jujuy","Salta"], s:"min", pr:1, f:"El mayor comprador de litio del país. Cañería y accesorios HDPE/PVC, bombas y repuestos, geomembranas de pileta, reactivos (cal, soda, ácido clorhídrico), filtros, instrumentación, EPP.", nota:"Absorbió Arcadium (ex Livent + Allkem). Compra centralizada — apuntar a la estructura regional en Salta y Catamarca."},
+{n:"Ganfeng Lithium", g:"Mariana (Llullaillaco), Pozuelos-Pastos Grandes, Sal de la Puna", p:["Salta"], s:"min", pr:1, f:"Obra y operación simultáneas: cañería, bombeo, membranas, estructura metálica, eléctrico, contenedores, EPP, insumos de campamento."},
+{n:"Lithium Argentina", g:"Cauchari-Olaroz, con Ganfeng", p:["Jujuy"], s:"min", pr:1, f:"Reactivos de planta, cañería, bombas, filtros prensa y telas, membranas, repuestos mecánicos."},
+{n:"Eramet / Eramine South America", g:"Centenario-Ratones — DLE, con Tsingshan", p:["Salta"], s:"min", pr:1, f:"Resinas y consumibles de extracción directa, cañería, bombas dosificadoras, reactivos, instrumentación, EPP."},
+{n:"POSCO Argentina", g:"Sal de Oro — carbonato de litio de alta pureza", p:["Catamarca"], s:"min", pr:1, f:"Reactivos de alta pureza, cañería inoxidable, bombas, filtración, insumos de laboratorio, EPP."},
+{n:"Zijin Mining / Liex", g:"Tres Quebradas (3Q)", p:["Catamarca"], s:"min", pr:1, f:"Cañería, membranas, bombeo, eléctrico, generación de respaldo, campamento, EPP."},
+{n:"Galan Lithium", g:"Hombre Muerto West — construcción concluida", p:["Catamarca"], s:"min", pr:2, f:"Arranque de operación: instrumentación, repuestos de primera dotación, consumibles de planta, EPP."},
+{n:"Pluspetrol (litio)", g:"Pastos Grandes y Pozuelos", p:["Salta"], s:"min", pr:2, f:"Insumos de desarrollo y pilotos. Cuenta cruzada con su upstream de Neuquén: una sola relación comercial cubre dos verticales."},
+{n:"Alpha Lithium / Tecpetrol", g:"Tolillar y Hombre Muerto", p:["Salta","Catamarca"], s:"min", pr:2, f:"Igual que arriba, cuenta cruzada con Tecpetrol en Neuquén y Salta."},
+{n:"Lithium South", g:"Hombre Muerto Norte — con avance de POSCO", p:["Salta","Catamarca"], s:"min", pr:3, f:"Etapa temprana: sondaje, campamento, logística.", nota:"Cambio accionario en curso."},
+{n:"Argosy Minerals", g:"Rincón", p:["Salta"], s:"min", pr:3, f:"Escala piloto. Seguimiento."},
+
+/* ---------- MINERÍA: cobre ---------- */
+{n:"Vicuña Argentina (BHP + Lundin Mining)", g:"Josemaría y Filo del Sol — RIGI aprobado, USD 9.700 M iniciales", p:["San Juan"], s:"min", pr:1, f:"La obra más grande del país. Todo el paquete de construcción: estructura, cañería, eléctrico, geosintéticos, señalización, EPP, campamento, ferretería, herramientas, contenedores.", nota:"Entrar ahora por los contratistas de obra y quedar posicionado para la operación."},
+{n:"McEwen Copper", g:"Los Azules — primer cobre en el RIGI, USD 2.672 M", p:["San Juan"], s:"min", pr:1, f:"Obra y desarrollo: campamento, generación, cañería, perforación, EPP, logística de altura."},
+{n:"Glencore", g:"El Pachón (San Juan) y MARA / Agua Rica (Catamarca) — más de USD 18.000 M combinados", p:["San Juan","Catamarca"], s:"min", pr:1, f:"Ingeniería avanzada y obra temprana. Alta corporativa lenta pero contrato largo: conviene arrancar el trámite ya."},
+{n:"First Quantum Minerals", g:"Taca Taca — cobre de gran escala en la Puna", p:["Salta"], s:"min", pr:1, f:"Preparación de obra, incluida infraestructura ferroviaria y de agua. Insumos de construcción pesada y campamento."},
+{n:"Aldebaran Resources", g:"Altar", p:["San Juan"], s:"min", pr:2, f:"Exploración avanzada: sondaje diamantino, campamento de altura, logística."},
+{n:"NGEx Minerals", g:"Lunahuasi y Potro Cliffs", p:["San Juan"], s:"min", pr:2, f:"Campañas de perforación intensivas: consumibles de sondaje, cajas portatestigos, campamento."},
+{n:"PSJ Cobre Mendocino (San Jorge)", g:"Proyecto de cobre en reactivación", p:["Mendoza"], s:"min", pr:3, f:"Seguimiento — condicionado a licencia social y marco provincial."},
+
+/* ---------- MINERÍA: otros ---------- */
+{n:"Borax Argentina (Quiborax)", g:"Boratos — Tincalayu, Sijes y planta Campo Quijano", p:["Salta","Jujuy"], s:"min", pr:2, f:"Molienda, secado, cintas, elementos de desgaste, filtros, big bags, EPP."},
+{n:"CNEA", g:"Sierra Pintada, Cerro Solo, ciclo de combustible nuclear", p:["Mendoza","Chubut"], s:"min", pr:2, f:"Compras por licitación pública: laboratorio, seguridad radiológica, cañería, instrumentación."},
+{n:"Blue Sky Uranium / UrAmerica", g:"Amarillo Grande y proyectos de uranio", p:["Río Negro","Chubut"], s:"min", pr:3, f:"Exploración: sondaje, campamento, logística."},
+
+/* ---------- OIL & GAS: upstream ---------- */
+{n:"YPF", g:"Vaca Muerta, refinerías La Plata, Luján de Cuyo y Plaza Huincul; salió del convencional de Chubut y Santa Cruz", p:["Neuquén","Mendoza","Buenos Aires"], s:"oil", pr:1, f:"Mayor comprador industrial del país. Tubería y accesorios, válvulas, bombas, mangueras, EPP, ferretería, químicos, repuestos de planta.", nota:"Registro de proveedores propio. Camino más corto: entrar por AESA y por los contratistas de perforación y workover."},
+{n:"Pan American Energy (PAE)", g:"Cerro Dragón — el mayor yacimiento convencional del país; Neuquén; refinería Campana (Axion)", p:["Chubut","Santa Cruz","Neuquén","Buenos Aires"], s:"oil", pr:1, f:"Consumo enorme y continuo: varillas y accesorios de bombeo, empaquetaduras, mangueras, válvulas, EPP, químicos de producción, bandejas antiderrame."},
+{n:"Vista Energy", g:"Bajada del Palo Oeste — shale oil, crecimiento sostenido", p:["Neuquén","Río Negro"], s:"oil", pr:1, f:"Insumos de perforación y completación, tanques y contención, válvulas, instrumentación, EPP, logística de locación."},
+{n:"Pampa Energía", g:"Rincón de Aranda (shale oil), gas en Neuquén, generación eléctrica y petroquímica", p:["Neuquén","Buenos Aires","Salta"], s:"oil", pr:1, f:"Cuenta multi-vertical: un alta de proveedor abre upstream, generación y petroquímica a la vez. Válvulas, bombas, eléctrico, EPP, repuestos."},
+{n:"Tecpetrol (Techint)", g:"Fortín de Piedra — gas; Aguaragüe y áreas del NOA", p:["Neuquén","Salta"], s:"oil", pr:1, f:"Consumibles de planta de tratamiento, válvulas, instrumentación, EPP.", nota:"Grupo Techint: el alta habilita también a Techint E&C y Tenaris como interlocutores."},
+{n:"Pluspetrol", g:"Activos ex-ExxonMobil en Neuquén, más el NOA", p:["Neuquén","Salta"], s:"oil", pr:1, f:"Integración de activos recién adquiridos: momento de recambio de proveedores. Válvulas, bombeo, químicos, EPP."},
+{n:"Shell Argentina", g:"Sierras Blancas, Cruz de Lorena, Bajada de Añelo", p:["Neuquén"], s:"oil", pr:1, f:"Estándar HSE alto y alta exigencia documental, pero contratos estables. Cañería, válvulas, contención, EPP certificado."},
+{n:"TotalEnergies", g:"Aguada Pichana Este, Fénix offshore, áreas de Tierra del Fuego", p:["Neuquén","Tierra del Fuego"], s:"oil", pr:1, f:"Insumos de planta de gas, offshore y logística austral. EPP, válvulas, instrumentación, anticorrosivos."},
+{n:"Chevron", g:"Loma Campana y El Trapial, JV con YPF", p:["Neuquén"], s:"oil", pr:2, f:"Compra mayormente a través del operador y de contratistas. Entrar por esa vía."},
+{n:"Equinor", g:"CAN 100 offshore y Bandurria Centro", p:["Neuquén","Buenos Aires"], s:"oil", pr:2, f:"Etapa exploratoria: logística, EPP, contención."},
+{n:"CGC — Compañía General de Combustibles", g:"Cuenca Austral (Santa Cruz), Neuquén y NOA", p:["Santa Cruz","Neuquén","Salta"], s:"oil", pr:1, f:"Operador grande en Santa Cruz: bombeo mecánico, varillas, válvulas, mangueras, EPP, químicos. Cuenta natural si ya vendés en Cerro Negro o Cerro Vanguardia."},
+{n:"Pecom (Pérez Companc)", g:"Manantiales Behr — comprado a YPF por USD 410 M", p:["Chubut"], s:"oil", pr:1, f:"Operador nuevo en un campo maduro: está armando toda su cadena de abastecimiento desde cero. Ventana de entrada excepcional."},
+{n:"Crown Point Energy", g:"El Tordillo, La Tapera y Puesto Quiroga", p:["Chubut"], s:"oil", pr:1, f:"Mismo caso: recibió áreas de YPF, Tecpetrol y Pampa y necesita proveedores locales de bombeo, varillas, mangueras y EPP."},
+{n:"Patagonia Resources", g:"Áreas convencionales de la Cuenca del Golfo San Jorge cedidas por YPF", p:["Santa Cruz"], s:"oil", pr:1, f:"Recuperación secundaria y campos maduros: bombas, varillas, cañería, químicos de inyección, EPP."},
+{n:"Clear Petroleum", g:"Áreas convencionales del Golfo San Jorge", p:["Santa Cruz"], s:"oil", pr:2, f:"Igual perfil, escala menor. Decisión rápida."},
+{n:"Quintana E&P Argentina", g:"Consorcio con Quintana Energy Investments — áreas ex-YPF", p:["Santa Cruz"], s:"oil", pr:2, f:"Estructura nueva, compras en formación."},
+{n:"Azruge y Brest", g:"Áreas convencionales del Golfo San Jorge", p:["Santa Cruz"], s:"oil", pr:2, f:"Operadores chicos con compromisos de inversión: consumibles de producción y mantenimiento."},
+{n:"Roch", g:"Santa Cruz, Tierra del Fuego, Río Negro", p:["Santa Cruz","Tierra del Fuego"], s:"oil", pr:2, f:"Convencional y gas austral: válvulas, cañería, EPP, anticorrosivos."},
+{n:"Capex", g:"Agua del Cajón — upstream integrado con generación eléctrica", p:["Neuquén"], s:"oil", pr:2, f:"Cuenta doble: planta de gas y central térmica. Repuestos, filtros, lubricantes, instrumentación."},
+{n:"Aconcagua Energía", g:"Campos maduros en Mendoza y Río Negro", p:["Mendoza","Río Negro"], s:"oil", pr:2, f:"Especialista en recuperación de campos maduros: bombeo mecánico, varillas, workover, químicos."},
+{n:"Phoenix Global Resources (Mercuria)", g:"Mendoza y Neuquén", p:["Mendoza","Neuquén"], s:"oil", pr:2, f:"Consumibles de producción y mantenimiento."},
+{n:"President Energy / Petrolera Aconcagua", g:"Salta, Santa Cruz, Río Negro", p:["Salta","Santa Cruz"], s:"oil", pr:3, f:"Operaciones chicas: ferretería, EPP, mangueras."},
+{n:"Petroleras provinciales", g:"Fomicruz, Gas y Petróleo del Neuquén, Petrominera Chubut, EMESA, ENARSA, JEMSE, CAMYEN", p:["Santa Cruz","Neuquén","Chubut","Mendoza","Jujuy","Catamarca"], s:"oil", pr:2, f:"Compran por licitación pública provincial: menos barrera de entrada para un proveedor local, más burocracia. Registrarse en cada portal.", nota:"Son además socios de las majors: buena puerta lateral hacia los proyectos grandes."},
+
+/* ---------- OIL & GAS: midstream y downstream ---------- */
+{n:"Oldelval", g:"Oleoducto del Valle — ampliaciones Duplicar y Duplicar Norte", p:["Neuquén","Río Negro","Buenos Aires"], s:"oil", pr:1, f:"Obra lineal de gran escala: válvulas, bridas, revestimientos, anticorrosivos, señalización, EPP, contención, herramientas."},
+{n:"VMOS — Vaca Muerta Oil Sur", g:"Sistema de evacuación y exportación de crudo hacia Punta Colorada", p:["Neuquén","Río Negro"], s:"oil", pr:1, f:"Construcción activa hasta 2027: todo el paquete de obra y montaje. Ventana temporal — hay que entrar ahora."},
+{n:"TGS — Transportadora de Gas del Sur", g:"Transporta cerca del 60% del gas del país; planta Cerri; midstream en Vaca Muerta", p:["Buenos Aires","Neuquén","Santa Cruz"], s:"oil", pr:1, f:"Mantenimiento de plantas compresoras y de líquidos: válvulas, filtros, lubricantes, instrumentación, EPP, repuestos de compresión."},
+{n:"TGN — Transportadora de Gas del Norte", g:"Sistema norte y centro", p:["Salta","Santa Fe","Córdoba"], s:"oil", pr:2, f:"Igual perfil: repuestos de compresión, válvulas, instrumentación."},
+{n:"Axion Energy", g:"Refinería Campana — grupo PAE", p:["Buenos Aires"], s:"oil", pr:1, f:"Paradas de planta programadas: juntas, válvulas, andamios, EPP, herramientas antichispa, aislaciones."},
+{n:"Raízen (Shell)", g:"Refinería Dock Sud", p:["Buenos Aires"], s:"oil", pr:1, f:"Igual: mantenimiento de refinería y paradas de planta."},
+{n:"Refinor", g:"Refinería Campo Durán", p:["Salta"], s:"oil", pr:2, f:"Repuestos, válvulas, EPP, consumibles de mantenimiento."},
+{n:"Trafigura / Puma Energy", g:"Refinería Bahía Blanca y logística de combustibles", p:["Buenos Aires"], s:"oil", pr:2, f:"Mantenimiento, contención de derrames, EPP."},
+{n:"Oiltanking Ebytem y Termap", g:"Terminales marítimas de Caleta Córdova, Caleta Olivia y Puerto Rosales", p:["Chubut","Santa Cruz","Buenos Aires"], s:"oil", pr:2, f:"Mangueras de carga, contención marina, anticorrosivos, EPP, válvulas."},
+{n:"Compañía MEGA", g:"Separación de líquidos y fraccionamiento, Neuquén–Bahía Blanca", p:["Neuquén","Buenos Aires"], s:"oil", pr:2, f:"Repuestos de planta, válvulas criogénicas, instrumentación, EPP."},
+{n:"Profertil", g:"Urea y amoníaco, Bahía Blanca", p:["Buenos Aires"], s:"oil", pr:2, f:"Paradas de planta, bombas, válvulas, filtros, EPP para atmósferas amoniacales."},
+{n:"Dow / PBB Polisur", g:"Polo petroquímico de Bahía Blanca", p:["Buenos Aires"], s:"oil", pr:2, f:"Mantenimiento industrial, EPP ignífugo, herramientas certificadas, sellos y juntas."},
+{n:"Unipar Indupa, Petrocuyo, Petroquímica Río Tercero", g:"Petroquímica de escala media", p:["Buenos Aires","Mendoza","Córdoba"], s:"oil", pr:3, f:"Consumibles de mantenimiento, EPP, ferretería industrial."},
+{n:"Southern Energy (GNL)", g:"Buques de licuefacción en el Golfo San Matías", p:["Río Negro"], s:"oil", pr:2, f:"Obra de infraestructura costera y logística: contención, EPP, amarre, señalización.", nota:"Proyecto en desarrollo — confirmar cronograma antes de destinar recursos."},
+
+/* ---------- ENERGÍA ---------- */
+{n:"Central Puerto", g:"Mayor generador privado: térmica, hidro y renovables", p:["Buenos Aires","Neuquén","Córdoba"], s:"ene", pr:1, f:"Mantenimiento de centrales: filtros, lubricantes, repuestos de turbina, herramientas, EPP dieléctrico, ferretería."},
+{n:"AES Argentina", g:"Térmica, hidroeléctrica y eólica", p:["Buenos Aires","Neuquén","San Juan"], s:"ene", pr:1, f:"Igual perfil, más consumibles de parques eólicos: elementos de izaje, EPP de altura, lubricantes de multiplicadora."},
+{n:"YPF Luz", g:"Térmica y parques eólicos, con foco en abastecer a la minería", p:["Buenos Aires","Neuquén","Chubut","Santa Cruz"], s:"ene", pr:1, f:"Cuenta cruzada con YPF. Repuestos, EPP, cables, herramientas, ferretería."},
+{n:"Genneia", g:"Líder en generación eólica y solar del país", p:["Chubut","Buenos Aires","La Rioja","San Juan"], s:"ene", pr:1, f:"Operación y mantenimiento de parques: EPP de altura y rescate, izaje, lubricantes, tornillería de alta resistencia, torque."},
+{n:"Nucleoeléctrica Argentina (NA-SA)", g:"Atucha I, Atucha II y Embalse; extensión de vida de Atucha I", p:["Buenos Aires","Córdoba"], s:"ene", pr:1, f:"Compras técnicas por licitación, con trazabilidad y certificación exigentes. Es la cuenta ideal para <b>desarrollos especiales</b> y fabricación a plano.", nota:"Ciclo largo. Vale iniciar el alta aunque la primera orden tarde."},
+{n:"Transener y Transba", g:"Transporte en extra alta tensión — SADI, más de 20.000 km de líneas", p:["Nacional"], s:"ene", pr:1, f:"Obras de ampliación: morsetería, aisladores, herramientas de línea viva, EPP dieléctrico, señalización, ferretería galvanizada."},
+{n:"MSU Energy", g:"Ciclos combinados y solar", p:["Buenos Aires","Santa Fe","Salta"], s:"ene", pr:2, f:"Mantenimiento de centrales y parques: filtros, lubricantes, repuestos, EPP."},
+{n:"Albanesi / Generación Mediterránea", g:"Generación térmica distribuida", p:["Córdoba","Santa Fe","Río Negro"], s:"ene", pr:2, f:"Repuestos de motores y turbinas, filtros, lubricantes, ferretería."},
+{n:"360Energy", g:"Solar fotovoltaica de escala", p:["San Juan","La Rioja","Catamarca"], s:"ene", pr:2, f:"Estructura, torquería, limpieza de módulos, EPP, herramientas."},
+{n:"Hidroeléctricas del Comahue", g:"Alicurá, El Chocón, Piedra del Águila y Cerros Colorados", p:["Neuquén","Río Negro"], s:"ene", pr:2, f:"Mantenimiento mayor de máquinas y obras civiles: sellos, rodamientos, izaje, EPP, pintura industrial.", nota:"Concesiones relicitadas entre 2025 y 2026 — confirmar el operador vigente de cada complejo antes de contactar."},
+{n:"EBY Yacyretá y CTM Salto Grande", g:"Represas binacionales", p:["Corrientes","Misiones","Entre Ríos"], s:"ene", pr:2, f:"Licitación pública: repuestos hidromecánicos, izaje, EPP, pintura, ferretería."},
+{n:"Transportistas regionales", g:"Distrocuyo, Transnoa, Transnea, Transpa, Transcomahue", p:["Nacional"], s:"ene", pr:2, f:"Morsetería, aisladores, EPP dieléctrico, herramientas de línea, señalización."},
+{n:"Distribuidoras eléctricas", g:"Edenor, Edesur, EPEC, EPE Santa Fe, EDEA, EDEN, EDES, EDEMSA, EDESTE, EDESA, EJESA, EDET, EDELAR, EDESAL, SECHEEP, DPEC, Refsa", p:["Nacional"], s:"ene", pr:2, f:"Compra recurrente y previsible: EPP dieléctrico, herramientas aisladas, morsetería, cable, señalización, indumentaria de trabajo.", nota:"Las provinciales compran por licitación y puntúan proveedor radicado en la provincia."},
+{n:"CNEA, INVAP y Dioxitek", g:"Ciclo nuclear, ingeniería y producción de dióxido de uranio", p:["Río Negro","Córdoba","Formosa"], s:"ene", pr:2, f:"Fabricación especial certificada, laboratorio, seguridad radiológica, instrumentación."},
+
+/* ---------- INDUSTRIA ---------- */
+{n:"Aluar", g:"Única productora de aluminio primario del país, más parques eólicos propios", p:["Chubut","Buenos Aires"], s:"ind", pr:1, f:"Consumo industrial pesado y continuo: refractarios, elementos de desgaste, EPP para altas temperaturas, ferretería, izaje, lubricantes."},
+{n:"Loma Negra", g:"Mayor cementera del país: canteras y plantas de molienda", p:["Buenos Aires","Catamarca","San Juan","Neuquén"], s:"ind", pr:1, f:"Mismos rubros que la minería con compras más accesibles: bolas y revestimientos de molino, elementos de desgaste, cintas y empalmes, filtros de mangas, EPP."},
+{n:"Holcim Argentina", g:"Plantas de cemento y agregados", p:["Córdoba","Mendoza","Jujuy","Buenos Aires"], s:"ind", pr:1, f:"Igual perfil. Estándar corporativo de HSE alto: sirve como carta de presentación ante las mineras."},
+{n:"PCR — Petroquímica Comodoro Rivadavia", g:"Cemento, upstream de petróleo y parques eólicos", p:["Chubut","Neuquén","San Luis","Buenos Aires"], s:"ind", pr:1, f:"Tres verticales en un solo cliente. Es la cuenta con mejor relación esfuerzo-resultado del listado."},
+{n:"Cementos Avellaneda", g:"Plantas y canteras", p:["Buenos Aires","San Luis"], s:"ind", pr:2, f:"Molienda, desgaste, cintas, filtros, EPP."},
+{n:"Ternium Siderar", g:"Siderurgia integrada, San Nicolás y Ensenada", p:["Buenos Aires"], s:"ind", pr:2, f:"Refractarios, elementos de desgaste, EPP de alta temperatura, izaje, ferretería industrial."},
+{n:"Acindar — ArcelorMittal", g:"Acería y laminación", p:["Santa Fe","Buenos Aires"], s:"ind", pr:2, f:"Igual perfil siderúrgico."},
+
+/* ---------- CANAL INDIRECTO ---------- */
+{n:"Contratistas mineros subterráneos", g:"Redpath Argentina, Master Drilling, Cóndor y contratistas de desarrollo", p:["Santa Cruz","San Juan","Jujuy"], s:"can", pr:1, f:"Compran sostenimiento, aceros de perforación, EPP y ferretería con presupuesto propio. Deciden en semanas, sin portal corporativo."},
+{n:"Empresas de perforación diamantina", g:"Boart Longyear, Major Drilling, AGV Falcon, Andes Drilling, Hidrotec", p:["San Juan","Salta","Santa Cruz","Catamarca"], s:"can", pr:1, f:"Consumibles de sondaje, aditivos de perforación, cajas portatestigos, campamento, EPP, repuestos hidráulicos."},
+{n:"Servicios de perforación y workover O&G", g:"SLB, Halliburton, Baker Hughes, Weatherford, Nabors, DLS Archer, Petreven, San Antonio Internacional, Calfrac", p:["Neuquén","Chubut","Santa Cruz"], s:"can", pr:1, f:"Mangueras, acoples, EPP, herramientas, ferretería, contención, lubricantes. Alta rotación y compra descentralizada por base."},
+{n:"Constructoras de obra energética y minera", g:"Techint E&C, AESA, Milicic, JCR, Rovella Carranza, CRIBA, Dycasa, Chediack, Constructora Sudamericana", p:["Nacional"], s:"can", pr:1, f:"Obra de Vicuña, Los Azules, VMOS y Oldelval pasa por acá: ferretería, herramientas, izaje, señalización, EPP, contenedores, andamios."},
+{n:"Empresas de voladura", g:"Enaex, Orica, Famesa", p:["Santa Cruz","San Juan","Catamarca"], s:"can", pr:2, f:"El explosivo lo fabrican ellos, pero compran accesorios, mangueras de carga, EPP y consumibles de sus plantas en mina."},
+{n:"Operadores logísticos y de campamento", g:"Transportistas mineros, catering y facility de yacimiento", p:["Nacional"], s:"can", pr:2, f:"Equipamiento de campamento, contenedores, mobiliario, insumos de limpieza, señalización, contención."}
+];
+
+/* ---------- Render ---------- */
+const listEl = document.getElementById('list');
+const qEl = document.getElementById('q');
+const provEl = document.getElementById('prov');
+const prEl = document.getElementById('pr');
+const secfEl = document.getElementById('secf');
+const tallyEl = document.getElementById('tally');
+
+const order = ['min','oil','ene','ind','can'];
+const active = new Set();
+
+/* resumen */
+const counts = order.map(k => [k, D.filter(d => d.s === k).length]);
+const alta = D.filter(d => d.pr === 1).length;
+tallyEl.innerHTML =
+  '<div><b>' + D.length + '</b><span>Cuentas relevadas</span></div>' +
+  '<div><b>' + alta + '</b><span>Prioridad alta</span></div>' +
+  counts.map(([k,c]) => '<div><b style="color:' + SEC[k].color + '">' + c + '</b><span>' + SEC[k].short + '</span></div>').join('');
+
+/* filtros de sector */
+secfEl.innerHTML = order.map(k =>
+  '<button class="fbtn" data-k="' + k + '" aria-pressed="false"><i class="dot"></i>' + SEC[k].label + '</button>'
+).join('') + '<span class="count-live" id="live"></span>';
+
+secfEl.querySelectorAll('.fbtn').forEach(b => {
+  b.addEventListener('click', () => {
+    const k = b.dataset.k;
+    if (active.has(k)) { active.delete(k); b.setAttribute('aria-pressed','false'); }
+    else { active.add(k); b.setAttribute('aria-pressed','true'); }
+    render();
+  });
+});
+
+/* provincias */
+const provs = [...new Set(D.flatMap(d => d.p))].sort((a,b) => a.localeCompare(b,'es'));
+provs.forEach(p => {
+  const o = document.createElement('option');
+  o.value = p; o.textContent = p;
+  provEl.appendChild(o);
+});
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function render(){
+  const q = qEl.value.trim().toLowerCase();
+  const pv = provEl.value;
+  const pr = prEl.value;
+
+  const hit = D.filter(d => {
+    if (active.size && !active.has(d.s)) return false;
+    if (pv && !d.p.includes(pv)) return false;
+    if (pr && String(d.pr) !== pr) return false;
+    if (q) {
+      const hay = (d.n + ' ' + d.g + ' ' + d.f + ' ' + (d.nota || '') + ' ' + d.p.join(' ')).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('live').textContent = hit.length + ' de ' + D.length + ' cuentas';
+
+  if (!hit.length) {
+    listEl.innerHTML = '<p class="empty">Sin resultados para ese filtro</p>';
+    return;
+  }
+
+  listEl.innerHTML = order.filter(k => hit.some(d => d.s === k)).map(k => {
+    const rows = hit.filter(d => d.s === k);
+    return '<section class="group" style="--sc:' + SEC[k].color + '">' +
+      '<div class="group-head"><h2>' + SEC[k].label + '</h2>' +
+      '<span class="n">' + rows.length + (rows.length === 1 ? ' cuenta' : ' cuentas') + '</span></div>' +
+      '<p class="group-note">' + SEC[k].note + '</p>' +
+      rows.map(d =>
+        '<article class="row">' +
+          '<span class="prio p' + d.pr + '" title="Prioridad ' + (d.pr === 1 ? 'alta' : d.pr === 2 ? 'media' : 'baja') + '"></span>' +
+          '<div>' +
+            '<div class="r-top">' +
+              '<h3 class="r-name">' + esc(d.n) + '</h3>' +
+              d.p.map(x => '<span class="prov">' + esc(x) + '</span>').join('') +
+            '</div>' +
+            '<p class="r-op">' + esc(d.g) + '</p>' +
+            '<p class="r-foco">' + d.f + '</p>' +
+            (d.nota ? '<p class="r-nota">' + esc(d.nota) + '</p>' : '') +
+          '</div>' +
+        '</article>'
+      ).join('') +
+    '</section>';
+  }).join('');
+}
+
+qEl.addEventListener('input', render);
+provEl.addEventListener('change', render);
+prEl.addEventListener('change', render);
+render();
+</script>
+
+</body>
+</html>
