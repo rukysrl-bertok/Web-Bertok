@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+
+# Informes generados localmente: no van al repo
+relevamiento_full.txt
+sonda_api_full.txt
+*.db
