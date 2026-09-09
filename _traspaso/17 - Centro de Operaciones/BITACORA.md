@@ -27,6 +27,31 @@
 
 ---
 
+## 2026-09-09 · Gerardo (DESKTOP-O7FNU0O)
+
+**Qué se hizo**
+
+- Se preparó el traspaso completo a la PC: todos los archivos subidos a la rama `claude/project-analysis-4iwwdk` del repo `Web-Bertok`, en `_traspaso/`, con un `LEEME PRIMERO.md` como único punto de entrada.
+- Se abrió el encuadre del **segundo proyecto: Reposición a Full**, que no existía en ningún lado. Quedó en `plans/handoffs/2026-09-09 Reposición Full - arranque.md`, listo para pegar como primer mensaje de una sesión dedicada.
+
+**Decisiones tomadas sobre Reposición a Full**
+
+- **Ubicación:** `02 - Mercadolibre\Reposición Full\`. El argumento decisivo es la propiedad de los datos — el módulo escribe en `ML.db` y el 02 es el dueño de Mercado Libre. Además hay precedente: Hermes y Mercado Ads ya son submódulos de 02.
+- **Dos clases de tablas, separadas:** los datos crudos de ML (stock en Full, inbounds, sugerencia de cantidades) son **ingesta** y siguen la convención de nombres que ya usa `ML.db`; el cálculo de reposición es **derivado** y lleva prefijo propio `bertok_full_*`. Si se mezclan, en seis meses nadie sabe qué vino de ML y qué calculamos nosotros.
+- **No va en `bertok_bi_*`:** BI analiza el pasado, esto decide una operación futura.
+
+**Trampa encontrada — de proceso, no de código**
+
+- **Se trabajaron varios turnos creyendo estar en la PC, cuando la sesión corría en el contenedor remoto.** Claude Code desde la web o el celular no ve `ML.db` ni la carpeta de Bertok. Para el proyecto de Full eso es bloqueante: el primer paso es relevar `ML.db`. Quedó como verificación obligatoria al inicio de cada sesión, anotada en el `LEEME PRIMERO.md` y en los dos handoffs.
+
+**Qué quedó pendiente**
+
+- Mover `_traspaso/` a OneDrive y borrar la rama.
+- Correr `probar_guarda.py` en la máquina real.
+- Arrancar el relevamiento de `ML.db` para Full.
+
+---
+
 ## 2026-09-05 (c) · Gerardo (DESKTOP-O7FNU0O)
 
 **Qué se hizo**

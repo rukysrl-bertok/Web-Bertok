@@ -4,6 +4,9 @@
 
 Todo lo definido en esa sesión, listo para continuar. **Leer esto primero, después el `CLAUDE.md` del módulo.**
 
+> **Antes de nada: confirmá que la sesión es LOCAL.** Claude Code desde la web o el celular corre en un contenedor remoto que **no ve `ML.db` ni la carpeta de Bertok**. Ya pasó una vez.
+> `pwd` tiene que devolver la ruta de Windows, no `/home/user/...`, y `dir CLAUDE.md ML.db` tiene que listar los dos archivos.
+
 ---
 
 ## 1. Lo primero: sacar los archivos de la rama y ponerlos donde van
